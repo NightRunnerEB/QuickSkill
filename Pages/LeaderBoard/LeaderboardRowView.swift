@@ -14,7 +14,7 @@ struct LeaderboardFriendRow: View {
     var body: some View {
         HStack {
                     
-            Image(user.avatarImageUrl)
+            Image(user.photo)
                 .resizable()
                 .clipShape(Rectangle())
                 .cornerRadius(10.91)
@@ -33,10 +33,10 @@ struct LeaderboardFriendRow: View {
                 .padding(.leading, 4)
             
             Spacer()
-            League.leagues[user.experience / 1000].leagueImage
+            Image(systemName: League.leagues[user.xp / 1000].leagueImage)
                 .resizable()
                 .frame(width: 35, height: 35)
-            Text(String(format: "%.1f", Double(user.experience)/1000) + "k")
+            Text(String(format: "%.1f", Double(user.xp)/1000) + "k")
         }
         .padding()
     }
@@ -67,7 +67,7 @@ struct LeaderboardRow: View {
     var body: some View {
         
         HStack {
-            Image(user.avatarImageUrl)
+            Image(user.photo)
                 .resizable()
                 .clipShape(Rectangle())
                 .cornerRadius(10.91)
@@ -86,7 +86,7 @@ struct LeaderboardRow: View {
             
             Spacer(minLength: 20)
 
-            Text(String(format: "%.1f", Double(user.experience)/1000) + "k")
+            Text(String(format: "%.1f", Double(user.xp)/1000) + "k")
         }
         .padding()
     }

@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct LogInView: View {
-    @StateObject private var userVM = UserViewModel()
+    @EnvironmentObject var userVM: UserViewModel
     @State var email: String = ""
     @State var password: String = ""
+    @Environment(\.dismiss) var dismiss
     @FocusState private var focusedField: Field?
     
     enum Field {
@@ -20,6 +21,27 @@ struct LogInView: View {
     
     var body: some View {
         VStack(spacing: 10) {
+            
+            HStack {
+                Button(action: {
+                    dismiss()
+                }, label: {
+                    HStack(spacing: 0) {
+                        Rectangle()
+                            .foregroundColor(.clear)
+                            .background(Image(systemName: "chevron.left"))
+                            .frame(width: 20, height: 20)
+                        Text("Back")
+                            .font(Font.Poppins(size: 16))
+                            .foregroundColor(Color("Purple"))
+                    }
+                    .frame(width: 60, height: 20)
+                })
+                .padding(.leading, 15)
+                
+                Spacer()
+            }
+            
           VStack(spacing: 8) {
             Text("👋")
               Text("Welcome Back!")
@@ -95,15 +117,15 @@ struct LogInView: View {
         
         Spacer()
         
-//        if viewModel.isLoading {
-//            ProgressView()
-//                .lineSpacing(18)
-//                .foregroundColor(.white)
-//                .padding(EdgeInsets(top: 15, leading: 33, bottom: 15, trailing: 33))
-//                .frame(width: 132, height: 48)
-//                .background(Color.white)
-//                .cornerRadius(24)
-//        } else {
+        if userVM.isLoading {
+            ProgressView()
+                .lineSpacing(18)
+                .foregroundColor(.white)
+                .padding(EdgeInsets(top: 15, leading: 33, bottom: 15, trailing: 33))
+                .frame(width: 132, height: 48)
+                .background(Color.white)
+                .cornerRadius(24)
+        } else {
             Button(action: {
                 focusedField = nil // Скрыть клавиатуру
                 userVM.login(email: email, password: password)
@@ -119,12 +141,12 @@ struct LogInView: View {
                 .background(Color(red: 0.41, green: 0.05, blue: 0.92))
                 .cornerRadius(24)
             })
-//        }
-//
-//        if let errorMessage = viewModel.errorMessage {
-//            Text(errorMessage)
-//                .foregroundColor(.red)
-//        }
+        }
+
+        if let errorMessage = userVM.errorMessage {
+            Text(errorMessage)
+                .foregroundColor(.red)
+        }
 
     }
     

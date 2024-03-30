@@ -94,6 +94,6 @@ struct SnapCarousel<Content: View, T: Identifiable>: View {
 
 #Preview {
     @StateObject var userVM = UserViewModel()
-    return LeaderBoardView(currentLeagueId: userVM.user.experience / 1000)
+    return LeaderBoardView(currentLeagueId: userVM.user.xp / 1000)
         .environmentObject(userVM)
 }

@@ -42,6 +42,14 @@
 		6739295E2B9218A500F9B266 /* YouTubeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6739295D2B9218A500F9B266 /* YouTubeView.swift */; };
 		67392A232B9366EB00F9B266 /* SnapCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67392A222B9366EB00F9B266 /* SnapCarouselView.swift */; };
 		67392A262B936A6C00F9B266 /* SnapCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67392A252B936A6C00F9B266 /* SnapCarousel.swift */; };
+		6739FEAC2BB637AE00F74F3C /* CertificatesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6739FEAB2BB637AE00F74F3C /* CertificatesViewModel.swift */; };
+		6739FEB12BB63DCF00F74F3C /* DailyTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6739FEB02BB63DCF00F74F3C /* DailyTaskViewModel.swift */; };
+		6739FEB42BB71FCC00F74F3C /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6739FEB32BB71FCC00F74F3C /* Enums.swift */; };
+		6739FEB62BB724E100F74F3C /* TopicModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6739FEB52BB724E100F74F3C /* TopicModel.swift */; };
+		6739FEBA2BB73CF200F74F3C /* LessonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6739FEB92BB73CF200F74F3C /* LessonModel.swift */; };
+		6739FEBC2BB73E5700F74F3C /* LessonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6739FEBB2BB73E5700F74F3C /* LessonViewModel.swift */; };
+		6739FEBE2BB73F1500F74F3C /* PracticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6739FEBD2BB73F1500F74F3C /* PracticeViewModel.swift */; };
+		6739FEC22BB750D400F74F3C /* TopicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6739FEC12BB750D400F74F3C /* TopicViewModel.swift */; };
 		674A604B2B82C26600D21116 /* PresentationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674A604A2B82C26600D21116 /* PresentationView.swift */; };
 		674A60832B83EA3A00D21116 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674A60822B83EA3A00D21116 /* LogInView.swift */; };
 		674A60852B83EE0500D21116 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674A60842B83EE0500D21116 /* UserModel.swift */; };
@@ -99,7 +107,11 @@
 		676FBAED2BB23C2500B1EDB5 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676FBAEC2BB23C2500B1EDB5 /* FilterView.swift */; };
 		676FBAEF2BB24DAA00B1EDB5 /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676FBAEE2BB24DAA00B1EDB5 /* ConfirmationView.swift */; };
 		676FBAF12BB252D700B1EDB5 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676FBAF02BB252D700B1EDB5 /* File.swift */; };
-		67CAF5242BA3ACB400A44658 /* NetworkServiceWithAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CAF5232BA3ACB400A44658 /* NetworkServiceWithAlamofire.swift */; };
+		676FBAF32BB475CF00B1EDB5 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676FBAF22BB475CF00B1EDB5 /* NetworkService.swift */; };
+		676FBAF52BB4EB5700B1EDB5 /* BadgeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676FBAF42BB4EB5700B1EDB5 /* BadgeViewModel.swift */; };
+		676FBAF72BB4F03300B1EDB5 /* LeagueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676FBAF62BB4F03300B1EDB5 /* LeagueViewModel.swift */; };
+		676FBAF92BB5077E00B1EDB5 /* CourseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676FBAF82BB5077E00B1EDB5 /* CourseViewModel.swift */; };
+		67CAF5242BA3ACB400A44658 /* NetworkServiceWithCombine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CAF5232BA3ACB400A44658 /* NetworkServiceWithCombine.swift */; };
 		67CAF52A2BA3F4E900A44658 /* Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CAF5292BA3F4E900A44658 /* Structs.swift */; };
 /* End PBXBuildFile section */
 
@@ -157,6 +169,14 @@
 		6739295D2B9218A500F9B266 /* YouTubeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeView.swift; sourceTree = "<group>"; };
 		67392A222B9366EB00F9B266 /* SnapCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapCarouselView.swift; sourceTree = "<group>"; };
 		67392A252B936A6C00F9B266 /* SnapCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapCarousel.swift; sourceTree = "<group>"; };
+		6739FEAB2BB637AE00F74F3C /* CertificatesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificatesViewModel.swift; sourceTree = "<group>"; };
+		6739FEB02BB63DCF00F74F3C /* DailyTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTaskViewModel.swift; sourceTree = "<group>"; };
+		6739FEB32BB71FCC00F74F3C /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		6739FEB52BB724E100F74F3C /* TopicModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicModel.swift; sourceTree = "<group>"; };
+		6739FEB92BB73CF200F74F3C /* LessonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonModel.swift; sourceTree = "<group>"; };
+		6739FEBB2BB73E5700F74F3C /* LessonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonViewModel.swift; sourceTree = "<group>"; };
+		6739FEBD2BB73F1500F74F3C /* PracticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeViewModel.swift; sourceTree = "<group>"; };
+		6739FEC12BB750D400F74F3C /* TopicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicViewModel.swift; sourceTree = "<group>"; };
 		674A604A2B82C26600D21116 /* PresentationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationView.swift; sourceTree = "<group>"; };
 		674A60822B83EA3A00D21116 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		674A60842B83EE0500D21116 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
@@ -214,7 +234,11 @@
 		676FBAEC2BB23C2500B1EDB5 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		676FBAEE2BB24DAA00B1EDB5 /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
 		676FBAF02BB252D700B1EDB5 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
-		67CAF5232BA3ACB400A44658 /* NetworkServiceWithAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceWithAlamofire.swift; sourceTree = "<group>"; };
+		676FBAF22BB475CF00B1EDB5 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		676FBAF42BB4EB5700B1EDB5 /* BadgeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeViewModel.swift; sourceTree = "<group>"; };
+		676FBAF62BB4F03300B1EDB5 /* LeagueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueViewModel.swift; sourceTree = "<group>"; };
+		676FBAF82BB5077E00B1EDB5 /* CourseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseViewModel.swift; sourceTree = "<group>"; };
+		67CAF5232BA3ACB400A44658 /* NetworkServiceWithCombine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceWithCombine.swift; sourceTree = "<group>"; };
 		67CAF5292BA3F4E900A44658 /* Structs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structs.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -275,6 +299,8 @@
 		6739295C2B92188D00F9B266 /* Lesson */ = {
 			isa = PBXGroup;
 			children = (
+				6739FEBB2BB73E5700F74F3C /* LessonViewModel.swift */,
+				6739FEB92BB73CF200F74F3C /* LessonModel.swift */,
 				674A60D22B8E2EAD00D21116 /* CommentModel.swift */,
 				674A60CC2B8D436300D21116 /* LectureModel.swift */,
 				674A60D02B8D439100D21116 /* QuestionModel.swift */,
@@ -290,6 +316,48 @@
 				67392A252B936A6C00F9B266 /* SnapCarousel.swift */,
 			);
 			path = UIKitCarousel;
+			sourceTree = "<group>";
+		};
+		6739FEAA2BB6341600F74F3C /* Certificates */ = {
+			isa = PBXGroup;
+			children = (
+				673929502B90C7A700F9B266 /* CertificateModel.swift */,
+				6739FEAB2BB637AE00F74F3C /* CertificatesViewModel.swift */,
+			);
+			path = Certificates;
+			sourceTree = "<group>";
+		};
+		6739FEAF2BB63DB800F74F3C /* DailyTask */ = {
+			isa = PBXGroup;
+			children = (
+				673929562B91106E00F9B266 /* DailyTaskModel.swift */,
+				6739FEB02BB63DCF00F74F3C /* DailyTaskViewModel.swift */,
+			);
+			path = DailyTask;
+			sourceTree = "<group>";
+		};
+		6739FEB22BB71FBF00F74F3C /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				6739FEB32BB71FCC00F74F3C /* Enums.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		6739FEBF2BB7417300F74F3C /* Lecture */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Lecture;
+			sourceTree = "<group>";
+		};
+		6739FEC02BB750C300F74F3C /* Topic */ = {
+			isa = PBXGroup;
+			children = (
+				6739FEB52BB724E100F74F3C /* TopicModel.swift */,
+				6739FEC12BB750D400F74F3C /* TopicViewModel.swift */,
+			);
+			path = Topic;
 			sourceTree = "<group>";
 		};
 		675ED2272B77A0110039F0E9 = {
@@ -373,10 +441,8 @@
 			children = (
 				67CAF5262BA3B15500A44658 /* ProfileViews */,
 				67CAF5252BA3B13B00A44658 /* User */,
-				673929502B90C7A700F9B266 /* CertificateModel.swift */,
 				674A60C32B8D145500D21116 /* KeychainManager.swift */,
 				674A60922B84E15E00D21116 /* ResetPasswordViewModel.swift */,
-				673929562B91106E00F9B266 /* DailyTaskModel.swift */,
 				6739294E2B90A70000F9B266 /* CardShape.swift */,
 			);
 			path = Profile;
@@ -405,6 +471,11 @@
 		675ED2622B77A0AB0039F0E9 /* Courses */ = {
 			isa = PBXGroup;
 			children = (
+				6739FEC02BB750C300F74F3C /* Topic */,
+				6739295C2B92188D00F9B266 /* Lesson */,
+				6739FEBF2BB7417300F74F3C /* Lecture */,
+				67CAF51B2BA3AA1000A44658 /* Seminar */,
+				676FBAF82BB5077E00B1EDB5 /* CourseViewModel.swift */,
 				674A60CA2B8D433500D21116 /* CourseModel.swift */,
 				67CAF5172BA3A92400A44658 /* CourseView */,
 				675ED2842B77B4890039F0E9 /* AllCoursesView */,
@@ -450,30 +521,6 @@
 			);
 			name = CommunityView;
 			path = ../../Views/CommunityView;
-			sourceTree = "<group>";
-		};
-		675ED27D2B77B2C40039F0E9 /* PracticeView */ = {
-			isa = PBXGroup;
-			children = (
-				675ED2812B77B41D0039F0E9 /* QuickyPracticeView */,
-			);
-			name = PracticeView;
-			path = ../../Views/CoursesView/PracticeView;
-			sourceTree = "<group>";
-		};
-		675ED27F2B77B3E60039F0E9 /* CompilerView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = CompilerView;
-			path = ../../Views/CoursesView/CompilerView;
-			sourceTree = "<group>";
-		};
-		675ED2812B77B41D0039F0E9 /* QuickyPracticeView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = QuickyPracticeView;
 			sourceTree = "<group>";
 		};
 		675ED2832B77B46A0039F0E9 /* CreateDiscussView */ = {
@@ -567,11 +614,9 @@
 		675ED29B2B77C0450039F0E9 /* Pages */ = {
 			isa = PBXGroup;
 			children = (
-				67CAF51B2BA3AA1000A44658 /* Seminar */,
 				67CAF51A2BA3A99800A44658 /* Settings */,
 				67CAF5192BA3A97F00A44658 /* SearchUser */,
 				67CAF5182BA3A96800A44658 /* Shop */,
-				6739295C2B92188D00F9B266 /* Lesson */,
 				675ED2692B77AD450039F0E9 /* QuickSkillQuiz */,
 				675ED26A2B77AD590039F0E9 /* GetPro */,
 				675ED2632B77A1420039F0E9 /* Authorization */,
@@ -599,6 +644,8 @@
 		67CAF5152BA3A89300A44658 /* SubPages */ = {
 			isa = PBXGroup;
 			children = (
+				6739FEAF2BB63DB800F74F3C /* DailyTask */,
+				6739FEAA2BB6341600F74F3C /* Certificates */,
 				67CAF51C2BA3AA6500A44658 /* Leagues */,
 				67CAF5162BA3A8CC00A44658 /* Badges */,
 			);
@@ -609,6 +656,7 @@
 			isa = PBXGroup;
 			children = (
 				674A60D42B8E43FD00D21116 /* BadgeModel.swift */,
+				676FBAF42BB4EB5700B1EDB5 /* BadgeViewModel.swift */,
 			);
 			path = Badges;
 			sourceTree = "<group>";
@@ -652,8 +700,7 @@
 			isa = PBXGroup;
 			children = (
 				674A60CE2B8D437900D21116 /* PracticeModel.swift */,
-				675ED27D2B77B2C40039F0E9 /* PracticeView */,
-				675ED27F2B77B3E60039F0E9 /* CompilerView */,
+				6739FEBD2BB73F1500F74F3C /* PracticeViewModel.swift */,
 			);
 			path = Seminar;
 			sourceTree = "<group>";
@@ -662,6 +709,7 @@
 			isa = PBXGroup;
 			children = (
 				674A60A22B860E0000D21116 /* LeagueModel.swift */,
+				676FBAF62BB4F03300B1EDB5 /* LeagueViewModel.swift */,
 			);
 			path = Leagues;
 			sourceTree = "<group>";
@@ -669,14 +717,16 @@
 		67CAF5222BA3ABEC00A44658 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				6739FEB22BB71FBF00F74F3C /* Enums */,
 				676FBAE52BB1F47800B1EDB5 /* PartialSheets */,
 				670E329E2B94A26E00C7310E /* Poppins */,
 				673929542B90F34A00F9B266 /* MyCustomButtonStyle.swift */,
 				674A60AB2B88C27600D21116 /* Fonts.swift */,
-				67CAF5232BA3ACB400A44658 /* NetworkServiceWithAlamofire.swift */,
+				67CAF5232BA3ACB400A44658 /* NetworkServiceWithCombine.swift */,
 				67CAF5292BA3F4E900A44658 /* Structs.swift */,
 				6725F1852BA83D5D00236182 /* WebService.swift */,
 				676FBAF02BB252D700B1EDB5 /* File.swift */,
+				676FBAF22BB475CF00B1EDB5 /* NetworkService.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -693,8 +743,8 @@
 		67CAF5262BA3B15500A44658 /* ProfileViews */ = {
 			isa = PBXGroup;
 			children = (
-				673929482B8FEA4500F9B266 /* QuickyCardView.swift */,
 				6739294C2B8FEA5B00F9B266 /* BadgesCardView.swift */,
+				673929482B8FEA4500F9B266 /* QuickyCardView.swift */,
 				673929462B8FEA3A00F9B266 /* CalendarCardView.swift */,
 				6739294A2B8FEA5100F9B266 /* CertificatesCardView.swift */,
 				674A609A2B85321400D21116 /* ProfileView.swift */,
@@ -863,17 +913,19 @@
 			files = (
 				674A609D2B85326A00D21116 /* TabBarView.swift in Sources */,
 				673929572B91106E00F9B266 /* DailyTaskModel.swift in Sources */,
+				6739FEB12BB63DCF00F74F3C /* DailyTaskViewModel.swift in Sources */,
 				673929512B90C7A700F9B266 /* CertificateModel.swift in Sources */,
 				674A60B62B88D75000D21116 /* ContactUsView.swift in Sources */,
 				674A60DB2B8E898100D21116 /* CourseView.swift in Sources */,
 				6739294D2B8FEA5B00F9B266 /* BadgesCardView.swift in Sources */,
 				675ED2362B77A0110039F0E9 /* ContentView.swift in Sources */,
 				673929552B90F34A00F9B266 /* MyCustomButtonStyle.swift in Sources */,
-				67CAF5242BA3ACB400A44658 /* NetworkServiceWithAlamofire.swift in Sources */,
+				67CAF5242BA3ACB400A44658 /* NetworkServiceWithCombine.swift in Sources */,
 				674A60A32B860E0000D21116 /* LeagueModel.swift in Sources */,
 				673929592B915B8600F9B266 /* QuickSkillQuizView.swift in Sources */,
 				6739294B2B8FEA5100F9B266 /* CertificatesCardView.swift in Sources */,
 				6739294F2B90A70000F9B266 /* CardShape.swift in Sources */,
+				6739FEC22BB750D400F74F3C /* TopicViewModel.swift in Sources */,
 				676FBAED2BB23C2500B1EDB5 /* FilterView.swift in Sources */,
 				673929472B8FEA3A00F9B266 /* CalendarCardView.swift in Sources */,
 				674A60BE2B8B965400D21116 /* CardsProView.swift in Sources */,
@@ -883,14 +935,21 @@
 				674A60C42B8D145500D21116 /* KeychainManager.swift in Sources */,
 				6725F1862BA83D5D00236182 /* WebService.swift in Sources */,
 				674A60CD2B8D436300D21116 /* LectureModel.swift in Sources */,
+				676FBAF32BB475CF00B1EDB5 /* NetworkService.swift in Sources */,
+				676FBAF52BB4EB5700B1EDB5 /* BadgeViewModel.swift in Sources */,
+				6739FEAC2BB637AE00F74F3C /* CertificatesViewModel.swift in Sources */,
 				6739295E2B9218A500F9B266 /* YouTubeView.swift in Sources */,
+				676FBAF72BB4F03300B1EDB5 /* LeagueViewModel.swift in Sources */,
 				674A60C02B8BF6D800D21116 /* ShopView.swift in Sources */,
 				674A608B2B83F47100D21116 /* MainView.swift in Sources */,
 				674A60D32B8E2EAD00D21116 /* CommentModel.swift in Sources */,
+				6739FEB62BB724E100F74F3C /* TopicModel.swift in Sources */,
 				674A60C22B8C84D400D21116 /* ProLinkStringView.swift in Sources */,
+				6739FEB42BB71FCC00F74F3C /* Enums.swift in Sources */,
 				675ED2342B77A0110039F0E9 /* QuickSkillApp.swift in Sources */,
 				676FBAEB2BB2354000B1EDB5 /* CustomSearchBarView.swift in Sources */,
 				674A60832B83EA3A00D21116 /* LogInView.swift in Sources */,
+				6739FEBA2BB73CF200F74F3C /* LessonModel.swift in Sources */,
 				674A60AE2B88D1B900D21116 /* ProfileSettingsView.swift in Sources */,
 				676FBAF12BB252D700B1EDB5 /* File.swift in Sources */,
 				676FBAE22BB0EE8F00B1EDB5 /* SheetBattery.swift in Sources */,
@@ -908,11 +967,14 @@
 				674A60A82B88C12900D21116 /* GoalModel.swift in Sources */,
 				674A60D52B8E43FD00D21116 /* BadgeModel.swift in Sources */,
 				674A60872B83EEE000D21116 /* RegistrationView.swift in Sources */,
+				6739FEBE2BB73F1500F74F3C /* PracticeViewModel.swift in Sources */,
+				6739FEBC2BB73E5700F74F3C /* LessonViewModel.swift in Sources */,
 				6739295B2B92188400F9B266 /* LessonView.swift in Sources */,
 				674A60B82B88DEBA00D21116 /* LinkStringView.swift in Sources */,
 				674A60B42B88D1EB00D21116 /* GoalSettingView.swift in Sources */,
 				674A60D72B8E544600D21116 /* AllCoursesView.swift in Sources */,
 				674A60CB2B8D433500D21116 /* CourseModel.swift in Sources */,
+				676FBAF92BB5077E00B1EDB5 /* CourseViewModel.swift in Sources */,
 				676FBAE92BB1F5E600B1EDB5 /* SheetStreak.swift in Sources */,
 				674A609F2B85328600D21116 /* MyHomeView.swift in Sources */,
 				67392A232B9366EB00F9B266 /* SnapCarouselView.swift in Sources */,

@@ -5,26 +5,21 @@
 //  Created by Евгений Бухарев on 27.02.2024.
 //
 
+import Foundation
 import SwiftUI
 import PartialSheet
 
 struct AllCoursesView: View {
-    let courses = Course.allCourses
+    @ObservedObject var courseVM = CourseViewModel()
     
     @Environment(\.dismiss) var dismiss
     @State private var searchText = ""
     
-    var filteredCourses: [Course] {
-        if searchText.isEmpty {
-            return courses
-        } else {
-            return courses.filter { $0.title.localizedCaseInsensitiveContains(searchText) }
-        }
-    }
-    
     var body: some View {
         NavigationView {
         VStack {
+            
+            // Button Back
             HStack {
                 Button(action: {
                     dismiss()
@@ -45,12 +40,12 @@ struct AllCoursesView: View {
                 Spacer()
             }
             
-            CustomSearchBarView()
+            CustomSearchBarView(courseVM: courseVM)
                 .padding(.top, 10)
             
                 ScrollView {
                     LazyVStack {
-                        ForEach(filteredCourses) { course in
+                        ForEach(courseVM.courses) { course in
                             CourseItemView(course: course)
                                 .padding(.bottom, 10)
                             

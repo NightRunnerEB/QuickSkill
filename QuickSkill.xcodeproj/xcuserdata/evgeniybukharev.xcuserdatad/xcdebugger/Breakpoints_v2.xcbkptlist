@@ -3,4 +3,132 @@
    uuid = "202E4813-A727-4CD8-B64B-70EF4717BF6B"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6CB9D848-9A76-4908-AC4F-D61079EB743A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pages/Courses/AllCoursesView/CustomSearchBarView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "6"
+            endingLineNumber = "6"
+            landmarkName = "CustomSearchBarView"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "6CB9D848-9A76-4908-AC4F-D61079EB743A - 577f8e793dd060e4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "property wrapper backing initializer of QuickSkill.CustomSearchBarView.isSheetPresented : Swift.Bool"
+                  moduleName = "QuickSkill"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/evgeniybukharev/Desktop/QuickSkill/Pages/Courses/AllCoursesView/CustomSearchBarView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  uuid = "6CB9D848-9A76-4908-AC4F-D61079EB743A - f1cba6644675e754"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "QuickSkill.CustomSearchBarView.init(courseVM: QuickSkill.CourseViewModel) -&gt; QuickSkill.CustomSearchBarView"
+                  moduleName = "QuickSkill"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/evgeniybukharev/Desktop/QuickSkill/Pages/Courses/AllCoursesView/CustomSearchBarView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "6"
+                  endingLineNumber = "6"
+                  offsetFromSymbolStart = "68">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CC5126EC-20A9-4A24-996C-38FDE21F0A62"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QuickSkill/QuickSkillApp.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
+            landmarkName = "QuickSkillApp"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "CC5126EC-20A9-4A24-996C-38FDE21F0A62 - 1f3f7fcb9602f3b2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "property wrapper backing initializer of QuickSkill.QuickSkillApp.userVM : QuickSkill.UserViewModel"
+                  moduleName = "QuickSkill"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/evgeniybukharev/Desktop/QuickSkill/QuickSkill/QuickSkillApp.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  uuid = "CC5126EC-20A9-4A24-996C-38FDE21F0A62 - 47ec30b80764e1aa"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "QuickSkill.QuickSkillApp.userVM.getter : QuickSkill.UserViewModel"
+                  moduleName = "QuickSkill"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/evgeniybukharev/Desktop/QuickSkill/QuickSkill/QuickSkillApp.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  uuid = "CC5126EC-20A9-4A24-996C-38FDE21F0A62 - 29e3da02c4ba563"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "QuickSkill.QuickSkillApp.$userVM.getter : SwiftUI.ObservedObject&lt;QuickSkill.UserViewModel&gt;.Wrapper"
+                  moduleName = "QuickSkill"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/evgeniybukharev/Desktop/QuickSkill/QuickSkill/QuickSkillApp.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "CC5126EC-20A9-4A24-996C-38FDE21F0A62 - 889203b71785fdc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "default argument 0 of QuickSkill.QuickSkillApp.init(userVM: @autoclosure () -&gt; QuickSkill.UserViewModel) -&gt; QuickSkill.QuickSkillApp"
+                  moduleName = "QuickSkill"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/evgeniybukharev/Desktop/QuickSkill/QuickSkill/QuickSkillApp.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "4">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

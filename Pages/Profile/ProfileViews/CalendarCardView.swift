@@ -89,8 +89,3 @@ struct CalendarCardView: View {
         }
     }
 }
-
-#Preview {
-    var user = User(email: "vipkiller.b@mail.ru", firstName: "Evgeniy", lastName: "Bukharev", password: "123456789", avatarImageUrl: "ДорохиеДрузья", bio: "Qwerty")
-    return CalendarCardView(streak: user.streak, streakRecord: user.streakRecord)
-}

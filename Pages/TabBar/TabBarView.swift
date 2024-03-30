@@ -21,17 +21,17 @@ struct TabBarView: View {
                 }
                 .tag("My Home")
 
-            LeaderBoardView(currentLeagueId: userVM.user.experience / 1000)
+            LeaderBoardView(currentLeagueId: /*userVM.user.xp / */1000)
                 .tabItem {
                     Label("Leader Board", image: "Stairs")
                 }
                 .tag("Leader Board")
 
-            CourseView(course: Course.allCourses[Array(userVM.user.coursesSuccess.keys)[0]])
-                .tabItem {
-                    Label("Courses", image: "Rocket_bar")
-                }
-                .tag("Courses")
+//            CourseView(course: Course.allCourses[Array(userVM.user.coursesSuccess.keys)[0]])
+//                .tabItem {
+//                    Label("Courses", image: "Rocket_bar")
+//                }
+//                .tag("Courses")
 
             CommunityView()
                 .tabItem {

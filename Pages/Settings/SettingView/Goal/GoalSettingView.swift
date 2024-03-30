@@ -81,7 +81,7 @@ struct GoalSettingView: View {
                         .onLongPressGesture(minimumDuration: 10, pressing: { isPressing in
                                 self.isPressedDict[0] = isPressing
                         }, perform: {
-                            userVM.user.goal.description = "Find a new job 👨‍💻"
+                            userVM.user.goalText = "Find a new job 👨‍💻"
                         })
                         
                         ZStack() {
@@ -106,7 +106,7 @@ struct GoalSettingView: View {
                         .onLongPressGesture(minimumDuration: 10, pressing: { isPressing in
                                 self.isPressedDict[1] = isPressing
                         }, perform: {
-                            userVM.user.goal.description = "Just get a new skill😎"
+                            userVM.user.goalText = "Just get a new skill😎"
                         })
                     }
                     
@@ -132,7 +132,7 @@ struct GoalSettingView: View {
                         .onLongPressGesture(minimumDuration: 10, pressing: { isPressing in
                                 self.isPressedDict[2] = isPressing
                         }, perform: {
-                            userVM.user.goal.description = "Learn for fun🙂"
+                            userVM.user.goalText = "Learn for fun🙂"
                         })
                         
                         ZStack() {
@@ -155,7 +155,7 @@ struct GoalSettingView: View {
                         .onLongPressGesture(minimumDuration: 10, pressing: { isPressing in
                                 self.isPressedDict[3] = isPressing
                         }, perform: {
-                            userVM.user.goal.description = "Learn for school🏫"
+                            userVM.user.goalText = "Learn for school🏫"
                         })
                     }
                     
@@ -180,7 +180,7 @@ struct GoalSettingView: View {
                         .onLongPressGesture(minimumDuration: 10, pressing: { isPressing in
                                 self.isPressedDict[4] = isPressing
                         }, perform: {
-                            userVM.user.goal.description = "Get raise🔝"
+                            userVM.user.goalText = "Get raise🔝"
                         })
                         
                         ZStack() {
@@ -195,7 +195,7 @@ struct GoalSettingView: View {
                                         .stroke(.black, lineWidth: 0.50)
                                 )
                             
-                            TextField("Or type your own...", text: $userVM.user.goal.description)
+                            TextField("Or type your own...", text: $userVM.user.goalText)
                                 .padding()
                                 .font(Font.custom("Poppins", size: 16))
                                 .lineSpacing(15.60)
@@ -209,7 +209,7 @@ struct GoalSettingView: View {
                 Text("How many days a week will you study? 🗓️")
                     .font(Font.Poppins(size: 16.70).weight(.medium))
                 
-                GoalSliderView(dayOfWeek: $userVM.user.goal.duraction)
+//                GoalSliderView(dayOfWeek: $userVM.user.goalDay)
             }
             
             VStack(spacing: 32) {
@@ -279,7 +279,7 @@ struct GoalSettingView: View {
     }
 }
 
-#Preview {
-    GoalSettingView()
-        .environmentObject(UserViewModel())
-}
+//#Preview {
+//    GoalSettingView()
+//        .environmentObject(UserViewModel())
+//}

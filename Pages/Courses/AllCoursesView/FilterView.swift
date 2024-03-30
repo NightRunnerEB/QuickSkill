@@ -8,31 +8,9 @@
 import SwiftUI
 
 struct FilterView: View {
-    @State private var selectedSkillLevel: SkillLevel?
-    @State private var selectedTimeFrame: TimeFrame?
-    @State private var selectedCost: CostOption?
-    
-    enum SkillLevel: String, CaseIterable, Identifiable {
-        case beginner = "Beginner"
-        case intermediate = "Intermediate"
-        case advanced = "Advanced"
-        
-        var id: String { self.rawValue }
-    }
-    
-    enum TimeFrame: String, CaseIterable, Identifiable {
-        case oneMonth = "< 1 month"
-        case twoThreeMonths = "2-3 months"
-        case threePlusMonths = "3+ month"
-        
-        var id: String { self.rawValue }
-    }
-    
-    enum CostOption: String, CaseIterable, Identifiable {
-        case free, paid
-        
-        var id: String { self.rawValue }
-    }
+    @Binding var selectedSkillLevel: SkillLevel?
+    @Binding var selectedTimeFrame: TimeFrame?
+    @Binding var selectedCost: CostOption?
     
     var body: some View {
         VStack(spacing: 15) {
@@ -91,11 +69,5 @@ struct FilterView: View {
                 .padding()
             }
         }
-    }
-}
-
-struct FilterView_Previews: PreviewProvider {
-    static var previews: some View {
-        FilterView()
     }
 }

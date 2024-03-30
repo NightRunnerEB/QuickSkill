@@ -89,8 +89,3 @@ struct QuickyCardView: View {
     }
     
 }
-
-#Preview {
-    @State var user = User(email: "vipkiller.b@mail.ru", firstName: "Evgeniy", lastName: "Bukharev", password: "123456789", avatarImageUrl: "ДорохиеДрузья", bio: "Qwerty")
-    return QuickyCardView(experience:user.experience)
-}

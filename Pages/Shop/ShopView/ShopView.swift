@@ -8,12 +8,25 @@
 import SwiftUI
 
 struct ShopView: View {
+    
+    @EnvironmentObject var userVM: UserViewModel
     @State private var selectedShopItem: ShopEndpoint?
     
+    @State var submitted = false
+    
     enum ShopEndpoint: String, CaseIterable, Identifiable {
+        
         case oneHeart = "https://localhost:8081//buy/heart/1"
-        case twoHearts = "https://localhost:8081//buy/heart/3"
+        case twoHearts = "https://localhost:8081//buy/heart/2"
         case fiveHearts = "https://localhost:8081//buy/heart/5"
+        
+        case oneSaver = "https://localhost:8081//buy/saver/1"
+        case twoSaver = "https://localhost:8081//buy/saver/2"
+        case threeSaver = "https://localhost:8081//buy/saver/3"
+        
+        case crystalls_1 = "https://localhost:8081//buy/crystalls/100"
+        case crystalls_2 = "https://localhost:8081//buy/crystalls/500"
+        case crystalls_3 = "https://localhost:8081//buy/crystalls/1000"
         
         var id: String { self.rawValue }
     }
@@ -34,7 +47,7 @@ struct ShopView: View {
                 
                 VStack(spacing: 40) {
                     
-                    //MARK: My inventory
+                    // MARK: My inventory
                     VStack {
                         HStack {
                             Rectangle()
@@ -52,9 +65,6 @@ struct ShopView: View {
                         HStack(spacing: 12) {
                             
                             //MARK: Heard Card
-                            Button(action: {
-                                self.selectedShopItem = .oneHeart
-                            }, label: {
                                 ZStack {
                                     Rectangle()
                                         .foregroundColor(.clear)
@@ -82,7 +92,7 @@ struct ShopView: View {
                                                     Image("Dotted_line")
                                                     
                                                     HStack(spacing: -3) {
-                                                        Text("x3")
+                                                        Text("\(userVM.user.energy)")
                                                             .font(Font.Poppins(size: 16.50).weight(.medium))
                                                             .foregroundStyle(Color("Purple"))
                                                         
@@ -99,12 +109,8 @@ struct ShopView: View {
                                             }
                                         )
                                 }
-                            })
                             
                             //MARK: Crystalls card
-                            Button(action: {
-                                self.selectedShopItem = .oneHeart
-                            }, label: {
                                 ZStack {
                                     Rectangle()
                                         .foregroundColor(.clear)
@@ -129,19 +135,15 @@ struct ShopView: View {
                                                     
                                                     Image("Dotted_line")
                                                     
-                                                    Text("x78")
+                                                    Text("\(userVM.user.crystalls)")
                                                         .font(Font.Poppins(size: 16.50).weight(.medium))
                                                         .foregroundStyle(Color("Purple"))
                                                 }
                                             }
                                         )
                                 }
-                            })
                             
                             //MARK: StreakSaver card
-                            Button(action: {
-                                self.selectedShopItem = .oneHeart
-                            }, label: {
                                 ZStack {
                                     Rectangle()
                                         .foregroundColor(.clear)
@@ -167,14 +169,13 @@ struct ShopView: View {
                                                     
                                                     Image("Dotted_line")
                                                     
-                                                    Text("x5")
+                                                    Text("\(userVM.user.streakSavers)")
                                                         .font(Font.Poppins(size: 16.50).weight(.medium))
                                                         .foregroundStyle(Color("Purple"))
                                                 }
                                             }
                                         )
                                 }
-                            })
                         }
                     }
                     
@@ -324,6 +325,10 @@ struct ShopView: View {
                             //MARK: One heart card
                             Button(action: {
                                 self.selectedShopItem = .oneHeart
+                                if submitted {
+                                    userVM.user.energy += 1
+                                    submitted = false
+                                }
                             }, label: {
                                 ZStack {
                                     Rectangle()
@@ -364,6 +369,10 @@ struct ShopView: View {
                             //MARK: Two hearts card
                             Button(action: {
                                 self.selectedShopItem = .oneHeart
+                                if submitted {
+                                    userVM.user.energy += 2
+                                    submitted = false
+                                }
                             }, label: {
                                 ZStack {
                                     Rectangle()
@@ -409,7 +418,11 @@ struct ShopView: View {
                             
                             //MARK: Multihearts card
                             Button(action: {
-                                self.selectedShopItem = .oneHeart
+                                self.selectedShopItem = .fiveHearts
+                                if submitted {
+                                    userVM.user.energy += 5
+                                    submitted = false
+                                }
                             }, label: {
                                 ZStack {
                                     Rectangle()
@@ -482,6 +495,10 @@ struct ShopView: View {
                             //MARK: Streak saver card one
                             Button(action: {
                                 self.selectedShopItem = .oneHeart
+                                if submitted {
+                                    userVM.user.streakSavers += 1
+                                    submitted = false
+                                }
                             }, label: {
                                 ZStack {
                                     Rectangle()
@@ -536,7 +553,11 @@ struct ShopView: View {
                             
                             //MARK: Streak saver card two
                             Button(action: {
-                                self.selectedShopItem = .oneHeart
+                                self.selectedShopItem = .twoHearts
+                                if submitted {
+                                    userVM.user.streakSavers += 2
+                                    submitted = false
+                                }
                             }, label: {
                                 ZStack {
                                     Rectangle()
@@ -577,7 +598,11 @@ struct ShopView: View {
                             
                             //MARK: Streak saver card three
                             Button(action: {
-                                self.selectedShopItem = .oneHeart
+                                self.selectedShopItem = .fiveHearts
+                                if submitted {
+                                    userVM.user.streakSavers += 3
+                                    submitted = false
+                                }
                             }, label: {
                                 ZStack {
                                     Rectangle()
@@ -641,6 +666,10 @@ struct ShopView: View {
                             //MARK: Crystalls card one
                             Button(action: {
                                 self.selectedShopItem = .oneHeart
+                                if submitted {
+                                    userVM.user.crystalls += 100
+                                    submitted = false
+                                }
                             }, label: {
                                 ZStack {
                                     Rectangle()
@@ -681,6 +710,10 @@ struct ShopView: View {
                             //MARK: Crystalls card two
                             Button(action: {
                                 self.selectedShopItem = .oneHeart
+                                if submitted {
+                                    userVM.user.crystalls += 500
+                                    submitted = false
+                                }
                             }, label: {
                                 ZStack {
                                     Rectangle()
@@ -730,6 +763,10 @@ struct ShopView: View {
                             //MARK: Crystalls card three
                             Button(action: {
                                 self.selectedShopItem = .oneHeart
+                                if submitted {
+                                    userVM.user.crystalls += 1000
+                                    submitted = false
+                                }
                             }, label: {
                                 ZStack {
                                     Rectangle()
@@ -794,6 +831,7 @@ struct ShopView: View {
                     message: Text("Are you sure you want to make a purchase?"),
                     primaryButton: .cancel(Text("Confirm")) {
                         purchaseItem(item)
+                        submitted = true
                     },
                     secondaryButton: .default(Text("Cancel"))
                 )

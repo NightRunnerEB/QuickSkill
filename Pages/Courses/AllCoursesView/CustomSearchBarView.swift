@@ -4,6 +4,11 @@ import PartialSheet
 struct CustomSearchBarView: View {
     @State private var searchText: String = ""
     @State private var isSheetPresented = false
+    @ObservedObject var courseVM: CourseViewModel
+    
+    @State private var skillLevel: SkillLevel?
+    @State private var timeFrame: TimeFrame?
+    @State private var cost: CostOption?
     
     var body: some View {
         VStack(spacing: 0) {
@@ -14,10 +19,14 @@ struct CustomSearchBarView: View {
                 .cornerRadius(8)
                 .overlay(
                     HStack {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(.gray)
-                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                            .padding(.leading, 2)
+                        Button(action: {
+                            courseVM.getFilteredCourses(name: searchText, difficult: skillLevel?.id, duration: timeFrame?.id, free: cost?.id)
+                        }, label: {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.gray)
+                                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                .padding(.leading, 2)
+                        })
                         
                         if !searchText.isEmpty {
                             Button(action: {
@@ -40,7 +49,9 @@ struct CustomSearchBarView: View {
                         .padding(.trailing, 15)
                         .partialSheet(
                             isPresented: $isSheetPresented,
-                            content: FilterView.init
+                            content: {
+                                FilterView(selectedSkillLevel: $skillLevel, selectedTimeFrame: $timeFrame, selectedCost: $cost)
+                            }
                         )
                     }
                 )
@@ -50,17 +61,5 @@ struct CustomSearchBarView: View {
                 .foregroundStyle(Color("Block"))
                 .frame(width: 350, height: 2)
         }
-    }
-}
-
-struct Test5: View {
-    var body: some View {
-        CustomSearchBarView()
-    }
-}
-
-struct Test5_Previews: PreviewProvider {
-    static var previews: some View {
-        Test5()
     }
 }

@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct RegistrationView: View {
-    @StateObject private var userVM = UserViewModel()
+    @EnvironmentObject private var userVM: UserViewModel
     @FocusState private var focusedField: Field?
+    @Environment(\.dismiss) var dismiss
+    @Binding var isShowingLogIn: Bool
     @State var firstName: String = ""
     @State var lastName: String = ""
     @State var email: String = ""
@@ -26,6 +28,27 @@ struct RegistrationView: View {
     
     var body: some View {
         VStack {
+            
+            HStack {
+                Button(action: {
+                    dismiss()
+                }, label: {
+                    HStack(spacing: 0) {
+                        Rectangle()
+                            .foregroundColor(.clear)
+                            .background(Image(systemName: "chevron.left"))
+                            .frame(width: 20, height: 20)
+                        Text("Back")
+                            .font(Font.Poppins(size: 16))
+                            .foregroundColor(Color("Purple"))
+                    }
+                    .frame(width: 60, height: 20)
+                })
+                .padding(.leading, 15)
+                
+                Spacer()
+            }
+            
             VStack(spacing: 10) {
                 VStack(spacing: 8) {
                     Text("🚀")
@@ -53,13 +76,15 @@ struct RegistrationView: View {
                         .onSubmit { focusedField = .lastName }
                         .font(Font.custom("Poppins", size: 17))
                     
-                    Button(action: {
-                        firstName = ""
-                    }, label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .imageScale(.small)
-                            .foregroundStyle(Color.gray)
-                    })
+                    if(!firstName.isEmpty) {
+                        Button(action: {
+                            firstName = ""
+                        }, label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .imageScale(.small)
+                                .foregroundStyle(Color.gray)
+                        })
+                    }
                 }
                 .padding(.horizontal, 17)
                 Rectangle()
@@ -77,13 +102,15 @@ struct RegistrationView: View {
                         .onSubmit { focusedField = .email }
                         .font(Font.custom("Poppins", size: 17))
                     
-                    Button(action: {
-                        lastName = ""
-                    }, label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .imageScale(.small)
-                            .foregroundStyle(Color.gray)
-                    })
+                    if(!lastName.isEmpty) {
+                        Button(action: {
+                            lastName = ""
+                        }, label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .imageScale(.small)
+                                .foregroundStyle(Color.gray)
+                        })
+                    }
                 }
                 .padding(.horizontal, 17)
                 Rectangle()
@@ -102,13 +129,16 @@ struct RegistrationView: View {
                         .onSubmit { focusedField = .password }
                         .font(Font.custom("Poppins", size: 17))
                     
-                    Button(action: {
-                        email = ""
-                    }, label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .imageScale(.small)
-                            .foregroundStyle(Color.gray)
-                    })
+                    if(!email.isEmpty) {
+                        Button(action: {
+                            email = ""
+                        }, label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .imageScale(.small)
+                                .foregroundStyle(Color.gray)
+                        })
+                    }
+                    
                 }
                 .padding(.horizontal, 17)
                 Rectangle()
@@ -126,13 +156,15 @@ struct RegistrationView: View {
                         .onSubmit { focusedField = .confirmPassword }
                         .font(Font.custom("Poppins", size: 17))
                     
-                    Button(action: {
-                        password = ""
-                    }, label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .imageScale(.small)
-                            .foregroundStyle(Color.gray)
-                    })
+                    if(!password.isEmpty) {
+                        Button(action: {
+                            password = ""
+                        }, label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .imageScale(.small)
+                                .foregroundStyle(Color.gray)
+                        })
+                    }
                 }
                 .padding(.horizontal, 17)
                 Rectangle()
@@ -149,13 +181,15 @@ struct RegistrationView: View {
                         .submitLabel(.done)
                         .font(Font.custom("Poppins", size: 17))
                     
-                    Button(action: {
-                        confirmPassword = ""
-                    }, label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .imageScale(.small)
-                            .foregroundStyle(Color.gray)
-                    })
+                    if(!confirmPassword.isEmpty) {
+                        Button(action: {
+                            confirmPassword = ""
+                        }, label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .imageScale(.small)
+                                .foregroundStyle(Color.gray)
+                        })
+                    }
                 }
                 .padding(.horizontal, 17)
                 Rectangle()
@@ -170,27 +204,34 @@ struct RegistrationView: View {
             Button(action: {
                 focusedField = nil // Скрыть клавиатуру
                 userVM.register(firstName: firstName, lastName: lastName, email: email, password: password)
+                if(userVM.isRegistered) {
+                    isShowingLogIn = true
+                    dismiss()
+                }
             }, label: {
                 HStack(spacing: 10) {
-                  Text("Sign Up")
-                    .font(Font.custom("Poppins", size: 17).weight(.semibold))
-                    .lineSpacing(18)
-                    .foregroundColor(.white)
+                    Text("Sign Up")
+                        .font(Font.custom("Poppins", size: 17).weight(.semibold))
+                        .lineSpacing(18)
+                        .foregroundColor(.white)
                 }
                 .padding(EdgeInsets(top: 15, leading: 33, bottom: 15, trailing: 33))
                 .frame(width: 132, height: 48)
                 .background(Color(red: 0.41, green: 0.05, blue: 0.92))
                 .cornerRadius(24)
             })
-        }
-        .alert("Registration Complete", isPresented: $userVM.isRegistered) {
-            Button("OK", role: .cancel) { }
+            
+            if(confirmPassword != password) {
+                Text("Вifferent passwords have been entered!")
+                    .foregroundColor(.red)
+            }
+            
+            if let errorMessage = userVM.errorMessage {
+                Text(errorMessage)
+                    .foregroundColor(.red)
+            }
         }
     }
 }
 
 
-
-#Preview {
-    RegistrationView()
-}

@@ -9,8 +9,8 @@ import Alamofire
 import Combine
 import Foundation
 
-class NetworkServiceWithAlamofire {
-    static let shared = NetworkServiceWithAlamofire()
+class NetworkServiceWithCombine {
+    static let shared = NetworkServiceWithCombine()
     
     // Ленивая инициализация для 'session', чтобы использовать 'manager'
     lazy var session: Session = {
@@ -29,7 +29,7 @@ class NetworkServiceWithAlamofire {
         // Создаем URLRequest и настраиваем его
         var request = URLRequest(url: url)
         request.httpMethod = "GET" // Устанавливаем метод запроса
-        request.setValue(token, forHTTPHeaderField: "Authorization") // Устанавливаем токен авторизации
+        request.setValue(token, forHTTPHeaderField: "great-cookie") // Устанавливаем токен авторизации
         request.setValue("application/json", forHTTPHeaderField: "Content-Type") // Устанавливаем заголовок Content-Type
         
         // Возвращаем публикатор, который выполняет запрос и декодирует ответ
@@ -57,7 +57,7 @@ class NetworkServiceWithAlamofire {
         // Создаем URLRequest и настраиваем его для POST запроса
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.setValue(token, forHTTPHeaderField: "Authorization")
+        request.setValue(token, forHTTPHeaderField: "great-cookie")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         do {
@@ -116,100 +116,5 @@ class NetworkServiceWithAlamofire {
                 return decoder
             }())
             .eraseToAnyPublisher()
-    }
-    
-    func registerUser(registrationData: RegistrationData, to urlString: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        guard let url = URL(string: urlString) else {
-            completion(.failure(NSError(domain: "InvalidURL", code: -1, userInfo: nil)))
-            return
-        }
-        
-        // Создаем URLRequest и настраиваем его для POST запроса
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        do {
-            let jsonData = try JSONEncoder().encode(registrationData)
-            request.httpBody = jsonData
-        } catch {
-            completion(.failure(error))
-            return
-        }
-        
-        // Выполняем запрос с использованием Alamofire
-        session.request(request).response { response in
-            guard let statusCode = response.response?.statusCode else {
-                completion(.failure(NSError(domain: "NoResponse", code: 0, userInfo: [NSLocalizedDescriptionKey: "Ответ от сервера не получен."])))
-                return
-            }
-            
-            switch statusCode {
-            case 200:
-                // Запрос успешно обработан
-                completion(.success(()))
-            case 400:
-                // Неправильное тело запроса
-                completion(.failure(NSError(domain: "BadRequest", code: 400, userInfo: [NSLocalizedDescriptionKey: "Неправильное тело запроса."])))
-            case 409:
-                // Ошибка на сервере
-                completion(.failure(NSError(domain: "ServerError", code: 409, userInfo: [NSLocalizedDescriptionKey: "Ошибка на сервере."])))
-            default:
-                // Обработка других кодов состояния
-                completion(.failure(NSError(domain: "UnexpectedResponse", code: statusCode, userInfo: [NSLocalizedDescriptionKey: "Неожиданный ответ от сервера с кодом \(statusCode)."])))
-            }
-        }
-    }
-    
-    func loginUser(loginData: LoginData, to urlString: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        guard let url = URL(string: urlString) else {
-            completion(.failure(NSError(domain: "InvalidURL", code: -1, userInfo: nil)))
-            return
-        }
-        
-        // Создаем URLRequest и настраиваем его для POST запроса
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        do {
-            let jsonData = try JSONEncoder().encode(loginData)
-            request.httpBody = jsonData
-        } catch {
-            completion(.failure(error))
-            return
-        }
-        
-        // Выполняем запрос с использованием Alamofire
-        session.request(request).response { response in
-            switch response.result {
-            case .success:
-                guard let httpResponse = response.response else {
-                    completion(.failure(NSError(domain: "NoResponse", code: 0, userInfo: nil)))
-                    return
-                }
-                
-                // Извлекаем cookies из заголовков ответа
-                if let headerFields = httpResponse.allHeaderFields as? [String: String], let url = httpResponse.url {
-                    let cookies = HTTPCookie.cookies(withResponseHeaderFields: headerFields, for: url)
-                    
-                    // Ищем нужный cookie
-                    if let userTokenCookie = cookies.first {
-                        // Сохраняем значение токена в Keychain
-                        print("Найден токен: \(userTokenCookie.value)")
-                        KeychainManager.shared.saveUserToken(userTokenCookie.value)
-                        completion(.success(()))
-                    } else {
-                        // Ошибка: cookie с токеном не найден
-                        completion(.failure(NSError(domain: "TokenError", code: -2, userInfo: [NSLocalizedDescriptionKey: "Токен пользователя не найден в cookies."])))
-                    }
-                } else {
-                    // Ошибка: не удалось извлечь cookies
-                    completion(.failure(NSError(domain: "CookieError", code: -3, userInfo: [NSLocalizedDescriptionKey: "Не удалось извлечь cookies из ответа."])))
-                }
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
     }
 }

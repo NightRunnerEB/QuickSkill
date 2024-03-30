@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct LeaderBoardView: View {
+    @ObservedObject var leagueVM: LeagueViewModel = LeagueViewModel()
+    @EnvironmentObject var userVM: UserViewModel
     
     enum RatingType {
         case weekly, friends
@@ -15,7 +17,6 @@ struct LeaderBoardView: View {
     
     @State private var selectedRating: RatingType = .weekly
     
-    @EnvironmentObject var userVM: UserViewModel
     var currentLeagueId: Int
     @State var currentIndex: Int = 0
     
@@ -24,9 +25,9 @@ struct LeaderBoardView: View {
             Spacer()
             
             SnapCarousel(trailingSpace: 270, target: currentIndex, index: $currentIndex, items: League.leagues) { league in
-
+                
                 VStack {
-                    league.leagueImage
+                    Image(systemName: league.leagueImage)
                         .resizable()
                         .frame(width: 70, height: 70)
                         .aspectRatio(contentMode: .fit)
@@ -72,76 +73,55 @@ struct LeaderBoardView: View {
             .frame(width: getRect().width / 1.3)
             
             if selectedRating == .weekly {
-                
-                List {
-                    Section {
-                        // Первые 5 пользователей
-                        ForEach(0..<5) { index in
-                            VStack(spacing: 0) {
-                                LeaderboardRow(user: userVM.user.ratingLeague[index], rank: index)
-                                
-                                if index != 4 {
-                                    Divider()
-                                        .padding(.leading, 10)
-                                        .padding(.trailing, 10)
-                                }
-                            }
-                        }
-                        .listRowInsets(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 2))
-                    }
-                    .listRowSeparator(.hidden)
-                    
-                    Image("Chevron_green")
-                    
-                    Section {
-                        // Следующие 10 пользователей
-                        ForEach(5..<15) { index in
-                            VStack(spacing: 0) {
-                                LeaderboardRow(user: userVM.user.ratingLeague[index])
-                                
-                                if index != 14 {
-                                    Divider()
-                                        .padding(.leading, 10)
-                                        .padding(.trailing, 10)
-                                }
-                            }
-                        }
-                        .listRowInsets(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 2))
-                    }
-                    .listRowSeparator(.hidden)
-                    
-                    Image("Chevron_red")
-                    
-                    Section {
-                        // Оставшиеся 5 пользователей
-                        ForEach(15..<20) { index in
-                            VStack(spacing: 0) {
-                                LeaderboardRow(user: userVM.user.ratingLeague[index])
-                                
-                                if index != 19 {
-                                    Divider()
-                                        .padding(.leading, 10)
-                                        .padding(.trailing, 10)
-                                }
-                            }
-                        }
-                        .listRowInsets(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 2))
-                    }
-                    .listRowSeparator(.hidden)
-                }
-                
-            } else {
-                if(userVM.user.following.isEmpty) {
-                    Text("It looks like you're currently flying solo.\nAdd friends to make learning more enjoyable!")
-                        .font(Font.custom("Poppins", size: 17))
+                if leagueVM.isLoading {
+                    ProgressView("Loading...")
                 } else {
                     List {
                         Section {
-                            ForEach(0..<userVM.user.following.count, id: \.self) { index in
+                            // Первые 5 пользователей
+                            ForEach(0..<5) { index in
                                 VStack(spacing: 0) {
-                                    LeaderboardFriendRow(user: userVM.user.following[index])
+                                    LeaderboardRow(user: leagueVM.users[index], rank: index)
                                     
-                                    if index != userVM.user.following.count - 1 {
+                                    if index != 4 {
+                                        Divider()
+                                            .padding(.leading, 10)
+                                            .padding(.trailing, 10)
+                                    }
+                                }
+                            }
+                            .listRowInsets(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 2))
+                        }
+                        .listRowSeparator(.hidden)
+                        
+                        Image("Chevron_green")
+                        
+                        Section {
+                            // Следующие 10 пользователей
+                            ForEach(5..<15) { index in
+                                VStack(spacing: 0) {
+                                    LeaderboardRow(user: leagueVM.users[index])
+                                    
+                                    if index != 14 {
+                                        Divider()
+                                            .padding(.leading, 10)
+                                            .padding(.trailing, 10)
+                                    }
+                                }
+                            }
+                            .listRowInsets(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 2))
+                        }
+                        .listRowSeparator(.hidden)
+                        
+                        Image("Chevron_red")
+                        
+                        Section {
+                            // Оставшиеся 5 пользователей
+                            ForEach(15..<20) { index in
+                                VStack(spacing: 0) {
+                                    LeaderboardRow(user: leagueVM.users[index])
+                                    
+                                    if index != 19 {
                                         Divider()
                                             .padding(.leading, 10)
                                             .padding(.trailing, 10)
@@ -153,19 +133,41 @@ struct LeaderBoardView: View {
                         .listRowSeparator(.hidden)
                     }
                 }
+                
+            } else {
+                if leagueVM.isLoading {
+                    ProgressView("Loading...")
+                } else {
+                    if(leagueVM.followings.isEmpty) {
+                        Text("It looks like you're currently flying solo.\nAdd friends to make learning more enjoyable!")
+                            .font(Font.custom("Poppins", size: 17))
+                    } else {
+                        List {
+                            Section {
+                                ForEach(Array(leagueVM.followings.enumerated()), id: \.element.username) { index, user in
+                                    VStack(spacing: 0) {
+                                        LeaderboardFriendRow(user: user)
+                                        
+                                        if index != leagueVM.followings.count - 1 {
+                                            Divider()
+                                                .padding(.leading, 10)
+                                                .padding(.trailing, 10)
+                                        }
+                                    }
+                                }
+                                .listRowInsets(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 2))
+                            }
+                            .listRowSeparator(.hidden)
+                        }
+                    }
+                }
             }
             
         }
         .onAppear(perform: {
-            currentIndex = userVM.user.experience / 1000
+            currentIndex = userVM.user.xp / 1000
         })
     }
-}
-
-#Preview {
-    @StateObject var userVM = UserViewModel()
-    return LeaderBoardView(currentLeagueId: userVM.user.experience / 1000)
-        .environmentObject(userVM)
 }
 
 extension View{
