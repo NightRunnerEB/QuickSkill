@@ -106,7 +106,6 @@
 		676FBAEB2BB2354000B1EDB5 /* CustomSearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676FBAEA2BB2354000B1EDB5 /* CustomSearchBarView.swift */; };
 		676FBAED2BB23C2500B1EDB5 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676FBAEC2BB23C2500B1EDB5 /* FilterView.swift */; };
 		676FBAEF2BB24DAA00B1EDB5 /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676FBAEE2BB24DAA00B1EDB5 /* ConfirmationView.swift */; };
-		676FBAF12BB252D700B1EDB5 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676FBAF02BB252D700B1EDB5 /* File.swift */; };
 		676FBAF32BB475CF00B1EDB5 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676FBAF22BB475CF00B1EDB5 /* NetworkService.swift */; };
 		676FBAF52BB4EB5700B1EDB5 /* BadgeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676FBAF42BB4EB5700B1EDB5 /* BadgeViewModel.swift */; };
 		676FBAF72BB4F03300B1EDB5 /* LeagueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676FBAF62BB4F03300B1EDB5 /* LeagueViewModel.swift */; };
@@ -233,7 +232,6 @@
 		676FBAEA2BB2354000B1EDB5 /* CustomSearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBarView.swift; sourceTree = "<group>"; };
 		676FBAEC2BB23C2500B1EDB5 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		676FBAEE2BB24DAA00B1EDB5 /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
-		676FBAF02BB252D700B1EDB5 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		676FBAF22BB475CF00B1EDB5 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		676FBAF42BB4EB5700B1EDB5 /* BadgeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeViewModel.swift; sourceTree = "<group>"; };
 		676FBAF62BB4F03300B1EDB5 /* LeagueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueViewModel.swift; sourceTree = "<group>"; };
@@ -725,7 +723,6 @@
 				67CAF5232BA3ACB400A44658 /* NetworkServiceWithCombine.swift */,
 				67CAF5292BA3F4E900A44658 /* Structs.swift */,
 				6725F1852BA83D5D00236182 /* WebService.swift */,
-				676FBAF02BB252D700B1EDB5 /* File.swift */,
 				676FBAF22BB475CF00B1EDB5 /* NetworkService.swift */,
 			);
 			path = Others;
@@ -951,7 +948,6 @@
 				674A60832B83EA3A00D21116 /* LogInView.swift in Sources */,
 				6739FEBA2BB73CF200F74F3C /* LessonModel.swift in Sources */,
 				674A60AE2B88D1B900D21116 /* ProfileSettingsView.swift in Sources */,
-				676FBAF12BB252D700B1EDB5 /* File.swift in Sources */,
 				676FBAE22BB0EE8F00B1EDB5 /* SheetBattery.swift in Sources */,
 				674A60AC2B88C27600D21116 /* Fonts.swift in Sources */,
 				674A60DD2B8E9C3200D21116 /* ProgressCircleView.swift in Sources */,

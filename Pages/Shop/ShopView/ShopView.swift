@@ -2,7 +2,7 @@
 //  ShopView.swift
 //  QuickSkill
 //
-//  Created by Али Сейфельдин on 26.02.2024.
+//  Created by Евгений Бухарев on 26.02.2024.
 //
 
 import SwiftUI

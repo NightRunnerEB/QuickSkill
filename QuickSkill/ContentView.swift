@@ -21,9 +21,6 @@ struct ContentView: View {
                     }
             } else {
                 PresentationView()
-                    .onAppear{
-                        isUserAuthenticated = false
-                    }
             }
         }
     }

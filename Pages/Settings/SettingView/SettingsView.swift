@@ -2,7 +2,7 @@
 //  SettingsView.swift
 //  QuickSkill
 //
-//  Created by Али СейфельдинАли Сейфельдин on 23.02.2024.
+//  Created by Евгений Бухарев on 23.02.2024.
 //
 
 import SwiftUI
