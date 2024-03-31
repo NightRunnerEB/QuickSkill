@@ -63,7 +63,7 @@ class User: Codable {
         self.coursesSuccess = [1:2]
 //        self.uniqueLogin = ""
         self.hearts = 5
-        self.crystalls = 333
+        self.crystalls = 3300
         self.streakSavers = 1
         self.streak = 8
         self.energy = 5
@@ -75,16 +75,3 @@ class User: Codable {
         self.ratingLeague = []
     }
 }
-
-//    init() {
-//        KeychainManager.shared.getCredentials().map { credentials in
-//            UserManager().fetchUser(uniqueLogin: credentials.uniqueLogin, password: credentials.password) { user, error in
-//                if let user = user {
-//                    // Успешно получили данные пользователя
-//                    // Обновите состояние приложения с полученным пользователем
-//                } else if let error = error {
-//                    // Обработка ошибки
-//                }
-//            }
-//        }
-//    }

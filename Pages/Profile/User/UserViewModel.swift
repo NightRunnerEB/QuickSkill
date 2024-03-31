@@ -20,30 +20,30 @@ final class UserViewModel: ObservableObject {
     }
     
     func register(firstName: String, lastName: String, email: String, password: String) {
-//        self.isUserAuthenticated = true         // В рамках тестрирования в период отсутствия взаимосвязи с сервером.
-        let registrationData = RegistrationData(firstName: firstName, lastName: lastName, email: email, password: password)
-        NetworkServiceWithAlamofire.shared.registerUser(registrationData: registrationData, to: "https://localhost:8081/api/auth/register") { result in
-            switch result {
-            case .success:
-                self.isRegistered = true
-                print("Регистрация успешно завершена. Токен сохранен.")
-            case .failure(let error):
-                print("Ошибка регистрации: \(error.localizedDescription)")
-            }
-        }
+        self.isRegistered = true
+//        let registrationData = RegistrationData(firstName: firstName, lastName: lastName, email: email, password: password)
+//        NetworkServiceWithAlamofire.shared.registerUser(registrationData: registrationData, to: "https://localhost:8081/api/auth/register") { result in
+//            switch result {
+//            case .success:
+//                self.isRegistered = true
+//                print("Регистрация успешно завершена. Токен сохранен.")
+//            case .failure(let error):
+//                print("Ошибка регистрации: \(error.localizedDescription)")
+//            }
+//        }
     }
     
     func login(email: String, password: String) {
-//        self.isUserAuthenticated = true         // В рамках тестрирования в период отсутствия взаимосвязи с сервером.
+        self.isUserAuthenticated = true         // В рамках тестрирования в период отсутствия взаимосвязи с сервером.
         let loginData = LoginData(email: email, password: password)
-        NetworkServiceWithAlamofire.shared.loginUser(loginData: loginData, to: "https://localhost:8081/api/auth/login")  { result in
-            switch result {
-            case .success:
-                self.isUserAuthenticated = true
-                print("Вход выполнен успешно. Токен сохранен.")
-            case .failure(let error):
-                print("Ошибка входа: \(error.localizedDescription)")
-            }
-        }
+//        NetworkServiceWithAlamofire.shared.loginUser(loginData: loginData, to: "https://localhost:8081/api/auth/login")  { result in
+//            switch result {
+//            case .success:
+//                self.isUserAuthenticated = true
+//                print("Вход выполнен успешно. Токен сохранен.")
+//            case .failure(let error):
+//                print("Ошибка входа: \(error.localizedDescription)")
+//            }
+//        }
     }
 }

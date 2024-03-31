@@ -1,65 +1,103 @@
 import SwiftUI
 
-struct ShopItem: Identifiable {
-    let id = UUID()
-    let icon: String
-    let title: String
-    let count: Int
-    let price: Double?
-    let endpoint: String
-}
-
-// Пример списка товаров для магазина
-let shopItems = [
-    ShopItem(icon: "heart.fill", title: "Love Potion", count: 3, price: 99.99, endpoint: "/buy/love-potion"),
-    // Добавьте здесь еще 8 элементов...
-]
-
-struct ShopTestView: View {
-    @State private var selectedShopItem: ShopItem?
+struct Test1View: View {
+    // Состояние для управления видимостью вью
+    @State private var isDetailViewVisible = false
     
     var body: some View {
-        ScrollView {
-            VStack {
-                ForEach(shopItems) { item in
-                    HStack {
-                        Image(systemName: item.icon)
-                        Text(item.title)
-                        Spacer()
-                        Text("x\(item.count)")
-                        if let price = item.price {
-                            Text("$\(price, specifier: "%.2f")")
-                        } else {
-                            Text("Free")
+        ZStack {
+            // Ваш основной контент
+            NavigationView {
+                List {
+                    Text("Главная страница")
+                    // ... ваш основной контент
+                    Button(action: {
+                        withAnimation(.easeInOut(duration: 0.5)) {
+                            isDetailViewVisible.toggle()
                         }
-                    }
-                    .padding()
-                    .onTapGesture {
-                        self.selectedShopItem = item
-                    }
+                    }, label: {
+                        Text("Tap me")
+                    })
                 }
             }
+            
+            // Выплывающая детальная информация
+            if isDetailViewVisible {
+                GeometryReader { geometry in
+                    HStack {
+                        DetailTestView()
+                            .frame(width: geometry.size.width * 0.65, height: geometry.size.height * 0.4)
+                            .background(Color.white)
+                            .cornerRadius(20)
+                            .shadow(radius: 5)
+                        
+                        Spacer()
+                    }
+                }
+                .background(
+                    Color.black.opacity(0.5)
+                        .edgesIgnoringSafeArea(.all)
+                        .onTapGesture {
+                            withAnimation {
+                                isDetailViewVisible = false
+                            }
+                        }
+                )
+            }
         }
-        .alert(item: $selectedShopItem) { item in
-            Alert(
-                title: Text("Confirm Purchase"),
-                message: Text("Are you sure you want to buy \(item.title)?"),
-                primaryButton: .destructive(Text("Confirm")) {
-                    purchaseItem(item)
-                },
-                secondaryButton: .cancel()
-            )
-        }
-    }
-    
-    private func purchaseItem(_ item: ShopItem) {
-        // Здесь логика для выполнения покупки, возможно, с отправкой запроса на сервер
-        print("Purchasing \(item.title) from \(item.endpoint)")
     }
 }
 
-struct ShopTestView_Previews: PreviewProvider {
-    static var previews: some View {
-        ShopTestView()
+struct ListTestItem {
+    let symbolName: String
+    let text: String
+}
+
+struct SymbolTestItemView: View {
+    var item: ListTestItem
+    
+    var body: some View {
+        HStack {
+            Image(systemName: item.symbolName)
+                .foregroundColor(.gray)
+                .imageScale(.large)
+                .frame(width: 30, alignment: .leading) // Ограничение размера иконки
+            
+            Text(item.text)
+                .font(.headline)
+                .layoutPriority(1) // Указываем, чтобы тексту отводилось больше пространства
+            
+            Spacer()
+        }
+        .padding()
     }
+}
+
+
+struct DetailTestView: View {
+    // Создадим список элементов, который хотим отобразить
+    let items: [ListTestItem] = [
+        ListTestItem(symbolName: "magnifyingglass", text: "Search courses"),
+        ListTestItem(symbolName: "person.2.fill", text: "C++ Intermediate"),
+        ListTestItem(symbolName: "film.fill", text: "Africans lenguage"),
+        // Добавьте здесь больше элементов по необходимости
+    ]
+    
+    var body: some View {
+        NavigationView {
+            ScrollView {
+                ForEach(items, id: \.symbolName) { item in
+                    SymbolTestItemView(item: item)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .fixedSize(horizontal: false, vertical: true) // Убедимся, что View не сжимается и не растягивается по горизонтали
+                }
+                .navigationBarTitle("Courses")
+            }
+        }
+    }
+}
+
+
+#Preview {
+    Test1View()
 }

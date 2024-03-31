@@ -22,13 +22,8 @@ struct LinkStringView: View {
             
             HStack {
                 
-                Button(action: {
-                    isShowingContactUs = true
-                }, label: {
+                NavigationLink(destination: ContactUsView()) {
                     Text(buttonText)
-                })
-                .fullScreenCover(isPresented: $isShowingContactUs) {
-                    ContactUsView()
                 }
 
                 Text(endText)

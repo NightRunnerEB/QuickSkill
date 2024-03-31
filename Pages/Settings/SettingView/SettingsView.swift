@@ -120,11 +120,11 @@ struct SettingsView: View {
             
             HStack {
                 Text("Came across any problems?")
-                  .font(Font.Poppins(size: 17).weight(.medium))
+                  .font(Font.Poppins(size: 15).weight(.medium))
                 
                 NavigationLink(destination: ContactUsView()) {
                     Text("Contact us")
-                        .font(Font.Poppins(size: 17).weight(.medium))
+                        .font(Font.Poppins(size: 15).weight(.medium))
                         .foregroundColor(.white)
                         .padding()
                         .frame(width: 120, height: 42)
