@@ -45,7 +45,7 @@ struct AllCoursesView: View {
             
                 ScrollView {
                     LazyVStack {
-                        ForEach(courseVM.courses) { course in
+                        ForEach(courseVM.allCourses) { course in
                             CourseItemView(course: course)
                                 .padding(.bottom, 10)
                             
@@ -58,6 +58,9 @@ struct AllCoursesView: View {
                     }
                 }
             }
+        }
+        .onAppear {
+            courseVM.getCourses()
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .attachPartialSheetToRoot()

@@ -11,8 +11,7 @@ struct ShopView: View {
     
     @EnvironmentObject var userVM: UserViewModel
     @State private var selectedShopItem: ShopEndpoint?
-    
-    @State var submitted = false
+    @State private var isShowingGetPro = false
     
     enum ShopEndpoint: String, CaseIterable, Identifiable {
         
@@ -65,117 +64,117 @@ struct ShopView: View {
                         HStack(spacing: 12) {
                             
                             //MARK: Heard Card
-                                ZStack {
-                                    Rectangle()
-                                        .foregroundColor(.clear)
-                                        .frame(width: 112.95, height: 125.96)
-                                        .background(Color.white)
-                                        .cornerRadius(7.81)
-                                        .overlay(
+                            ZStack {
+                                Rectangle()
+                                    .foregroundColor(.clear)
+                                    .frame(width: 112.95, height: 125.96)
+                                    .background(Color.white)
+                                    .cornerRadius(7.81)
+                                    .overlay(
+                                        
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 7.81)
+                                                .inset(by: 0.52)
+                                                .stroke(Color("Purple"), lineWidth: 1.3)
                                             
-                                            ZStack {
-                                                RoundedRectangle(cornerRadius: 7.81)
-                                                    .inset(by: 0.52)
-                                                    .stroke(Color("Purple"), lineWidth: 1.3)
+                                            
+                                            VStack(spacing: 4) {
+                                                Spacer()
+                                                Text("❤️")
+                                                    .font(.system(size: 53))
+                                                    .frame(width: 59.57, height: 59.57)
                                                 
                                                 
-                                                VStack(spacing: 4) {
-                                                    Spacer()
-                                                    Text("❤️")
-                                                        .font(.system(size: 53))
-                                                        .frame(width: 59.57, height: 59.57)
+                                                Text("Hearts")
+                                                    .font(Font.Poppins(size: 13.20).weight(.medium))
+                                                
+                                                Image("Dotted_line")
+                                                
+                                                HStack(spacing: -3) {
+                                                    Text("\(userVM.user.energy)")
+                                                        .font(Font.Poppins(size: 16.50).weight(.medium))
+                                                        .foregroundStyle(Color("Purple"))
                                                     
+                                                    Rectangle()
+                                                        .foregroundColor(.black)
+                                                        .frame(width: 16.26, height: 0.57)
+                                                        .rotationEffect(.degrees(-90))
                                                     
-                                                    Text("Hearts")
-                                                        .font(Font.Poppins(size: 13.20).weight(.medium))
-                                                    
-                                                    Image("Dotted_line")
-                                                    
-                                                    HStack(spacing: -3) {
-                                                        Text("\(userVM.user.energy)")
-                                                            .font(Font.Poppins(size: 16.50).weight(.medium))
-                                                            .foregroundStyle(Color("Purple"))
-                                                        
-                                                        Rectangle()
-                                                            .foregroundColor(.black)
-                                                            .frame(width: 16.26, height: 0.57)
-                                                            .rotationEffect(.degrees(-90))
-                                                        
-                                                        Text("+1 in 04:32")
-                                                            .font(Font.Poppins(size: 10.41))
-                                                    }
+                                                    Text("+1 in 04:32")
+                                                        .font(Font.Poppins(size: 10.41))
                                                 }
-                                                
                                             }
-                                        )
-                                }
+                                            
+                                        }
+                                    )
+                            }
                             
                             //MARK: Crystalls card
-                                ZStack {
-                                    Rectangle()
-                                        .foregroundColor(.clear)
-                                        .frame(width: 112.95, height: 125.96)
-                                        .background(Color.white)
-                                        .cornerRadius(7.81)
-                                        .overlay(
-                                            ZStack {
-                                                RoundedRectangle(cornerRadius: 7.81)
-                                                    .inset(by: 0.52)
-                                                    .stroke(Color("Purple"), lineWidth: 1.3)
+                            ZStack {
+                                Rectangle()
+                                    .foregroundColor(.clear)
+                                    .frame(width: 112.95, height: 125.96)
+                                    .background(Color.white)
+                                    .cornerRadius(7.81)
+                                    .overlay(
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 7.81)
+                                                .inset(by: 0.52)
+                                                .stroke(Color("Purple"), lineWidth: 1.3)
+                                            
+                                            VStack(spacing: 4) {
+                                                Spacer()
                                                 
-                                                VStack(spacing: 4) {
-                                                    Spacer()
-                                                    
-                                                    Image("Crystall")
-                                                        .resizable()
-                                                        .frame(width: 40, height: 59.57)
-
-                                                    Text("Crystalls")
-                                                        .font(Font.Poppins(size: 13.20).weight(.medium))
-                                                    
-                                                    Image("Dotted_line")
-                                                    
-                                                    Text("\(userVM.user.crystalls)")
-                                                        .font(Font.Poppins(size: 16.50).weight(.medium))
-                                                        .foregroundStyle(Color("Purple"))
-                                                }
+                                                Image("Crystall")
+                                                    .resizable()
+                                                    .frame(width: 40, height: 59.57)
+                                                
+                                                Text("Crystalls")
+                                                    .font(Font.Poppins(size: 13.20).weight(.medium))
+                                                
+                                                Image("Dotted_line")
+                                                
+                                                Text("\(userVM.user.crystals)")
+                                                    .font(Font.Poppins(size: 16.50).weight(.medium))
+                                                    .foregroundStyle(Color("Purple"))
                                             }
-                                        )
-                                }
+                                        }
+                                    )
+                            }
                             
                             //MARK: StreakSaver card
-                                ZStack {
-                                    Rectangle()
-                                        .foregroundColor(.clear)
-                                        .frame(width: 112.95, height: 125.96)
-                                        .background(Color.white)
-                                        .cornerRadius(7.81)
-                                        .overlay(
-                                            ZStack {
-                                                RoundedRectangle(cornerRadius: 7.81)
-                                                    .inset(by: 0.52)
-                                                    .stroke(Color("Purple"), lineWidth: 1.3)
+                            ZStack {
+                                Rectangle()
+                                    .foregroundColor(.clear)
+                                    .frame(width: 112.95, height: 125.96)
+                                    .background(Color.white)
+                                    .cornerRadius(7.81)
+                                    .overlay(
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 7.81)
+                                                .inset(by: 0.52)
+                                                .stroke(Color("Purple"), lineWidth: 1.3)
+                                            
+                                            
+                                            VStack(spacing: 4) {
+                                                Spacer()
                                                 
+                                                Image("Streak_saver")
+                                                    .resizable()
+                                                    .frame(width: 59.57, height: 59.57)
                                                 
-                                                VStack(spacing: 4) {
-                                                    Spacer()
-                                                    
-                                                    Image("Streak_saver")
-                                                        .resizable()
-                                                        .frame(width: 59.57, height: 59.57)
+                                                Text("Streak saver")
+                                                    .font(Font.Poppins(size: 13.20).weight(.medium))
                                                 
-                                                    Text("Streak saver")
-                                                        .font(Font.Poppins(size: 13.20).weight(.medium))
-                                                    
-                                                    Image("Dotted_line")
-                                                    
-                                                    Text("\(userVM.user.streakSavers)")
-                                                        .font(Font.Poppins(size: 16.50).weight(.medium))
-                                                        .foregroundStyle(Color("Purple"))
-                                                }
+                                                Image("Dotted_line")
+                                                
+                                                Text("\(userVM.user.streakSavers)")
+                                                    .font(Font.Poppins(size: 16.50).weight(.medium))
+                                                    .foregroundStyle(Color("Purple"))
                                             }
-                                        )
-                                }
+                                        }
+                                    )
+                            }
                         }
                     }
                     
@@ -204,7 +203,7 @@ struct ShopView: View {
                             
                             //MARK: UnlimitedHearts card
                             Button(action: {
-                                self.selectedShopItem = .oneHeart
+                                isShowingGetPro = true
                             }, label: {
                                 ZStack {
                                     Rectangle()
@@ -254,7 +253,7 @@ struct ShopView: View {
                             
                             //MARK: UnlimitedStreakSaver card
                             Button(action: {
-                                self.selectedShopItem = .oneHeart
+                                isShowingGetPro = true
                             }, label: {
                                 ZStack {
                                     Rectangle()
@@ -325,10 +324,6 @@ struct ShopView: View {
                             //MARK: One heart card
                             Button(action: {
                                 self.selectedShopItem = .oneHeart
-                                if submitted {
-                                    userVM.user.energy += 1
-                                    submitted = false
-                                }
                             }, label: {
                                 ZStack {
                                     Rectangle()
@@ -368,11 +363,7 @@ struct ShopView: View {
                             
                             //MARK: Two hearts card
                             Button(action: {
-                                self.selectedShopItem = .oneHeart
-                                if submitted {
-                                    userVM.user.energy += 2
-                                    submitted = false
-                                }
+                                self.selectedShopItem = .twoHearts
                             }, label: {
                                 ZStack {
                                     Rectangle()
@@ -419,10 +410,6 @@ struct ShopView: View {
                             //MARK: Multihearts card
                             Button(action: {
                                 self.selectedShopItem = .fiveHearts
-                                if submitted {
-                                    userVM.user.energy += 5
-                                    submitted = false
-                                }
                             }, label: {
                                 ZStack {
                                     Rectangle()
@@ -494,11 +481,7 @@ struct ShopView: View {
                             
                             //MARK: Streak saver card one
                             Button(action: {
-                                self.selectedShopItem = .oneHeart
-                                if submitted {
-                                    userVM.user.streakSavers += 1
-                                    submitted = false
-                                }
+                                self.selectedShopItem = .oneSaver
                             }, label: {
                                 ZStack {
                                     Rectangle()
@@ -553,11 +536,7 @@ struct ShopView: View {
                             
                             //MARK: Streak saver card two
                             Button(action: {
-                                self.selectedShopItem = .twoHearts
-                                if submitted {
-                                    userVM.user.streakSavers += 2
-                                    submitted = false
-                                }
+                                self.selectedShopItem = .twoSaver
                             }, label: {
                                 ZStack {
                                     Rectangle()
@@ -598,11 +577,7 @@ struct ShopView: View {
                             
                             //MARK: Streak saver card three
                             Button(action: {
-                                self.selectedShopItem = .fiveHearts
-                                if submitted {
-                                    userVM.user.streakSavers += 3
-                                    submitted = false
-                                }
+                                self.selectedShopItem = .threeSaver
                             }, label: {
                                 ZStack {
                                     Rectangle()
@@ -665,11 +640,7 @@ struct ShopView: View {
                             
                             //MARK: Crystalls card one
                             Button(action: {
-                                self.selectedShopItem = .oneHeart
-                                if submitted {
-                                    userVM.user.crystalls += 100
-                                    submitted = false
-                                }
+                                self.selectedShopItem = .crystalls_1
                             }, label: {
                                 ZStack {
                                     Rectangle()
@@ -705,15 +676,12 @@ struct ShopView: View {
                                     }
                                 }
                             })
-
+                            
                             
                             //MARK: Crystalls card two
                             Button(action: {
-                                self.selectedShopItem = .oneHeart
-                                if submitted {
-                                    userVM.user.crystalls += 500
-                                    submitted = false
-                                }
+                                self.selectedShopItem = .crystalls_2
+                                userVM.user.crystals += 500
                             }, label: {
                                 ZStack {
                                     Rectangle()
@@ -762,11 +730,7 @@ struct ShopView: View {
                             
                             //MARK: Crystalls card three
                             Button(action: {
-                                self.selectedShopItem = .oneHeart
-                                if submitted {
-                                    userVM.user.crystalls += 1000
-                                    submitted = false
-                                }
+                                self.selectedShopItem = .crystalls_3
                             }, label: {
                                 ZStack {
                                     Rectangle()
@@ -830,12 +794,40 @@ struct ShopView: View {
                     title: Text("Confirm Purchase"),
                     message: Text("Are you sure you want to make a purchase?"),
                     primaryButton: .cancel(Text("Confirm")) {
+                        switch item {
+                        case .oneHeart:
+                            userVM.user.energy += 1
+                            userVM.user.crystals -= 500
+                        case .twoHearts:
+                            userVM.user.energy += 2
+                            userVM.user.crystals -= 750
+                        case .fiveHearts:
+                            userVM.user.energy += 5
+                            userVM.user.crystals -= 2000
+                        case .oneSaver:
+                            userVM.user.streakSavers += 3
+                            userVM.user.crystals -= 500
+                        case .twoSaver:
+                            userVM.user.streakSavers += 5
+                            userVM.user.crystals -= 700
+                        case .threeSaver:
+                            userVM.user.streakSavers += 10
+                            userVM.user.crystals -= 1000
+                        case .crystalls_1:
+                            userVM.user.crystals += 100
+                        case .crystalls_2:
+                            userVM.user.crystals += 500
+                        case .crystalls_3:
+                            userVM.user.crystals += 1000
+                        }
                         purchaseItem(item)
-                        submitted = true
                     },
                     secondaryButton: .default(Text("Cancel"))
                 )
             }
+            .fullScreenCover(isPresented: $isShowingGetPro, content: {
+                GetProView()
+            })
         }
         .accentColor(.black)
     }

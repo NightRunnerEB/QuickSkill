@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProgressCircleView: View {
     
-    @State var progress: Int
+    var progress: Int
 
     var body: some View {
         ZStack {
@@ -19,7 +19,7 @@ struct ProgressCircleView: View {
                 .opacity(0.13)
             
             Circle()
-                .trim(from: 0.0, to: CGFloat(progress))
+                .trim(from: 0.0, to: CGFloat(progress) / 100)
                 .stroke(style: StrokeStyle(lineWidth: 10.0, lineCap: .round, lineJoin: .round))
                 .foregroundColor(Color("Purple"))
                 .rotationEffect(Angle(degrees: 270.0))

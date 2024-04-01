@@ -44,7 +44,12 @@ struct CourseItemView: View {
             
             Text(course.description)
                 .font(Font.Poppins(size: 17).weight(.light))
+                .padding(.leading, 13)
         }
-        .padding(7)
+        .padding(9)
     }
+}
+
+#Preview {
+    CourseItemView(course: Course.courses[0])
 }

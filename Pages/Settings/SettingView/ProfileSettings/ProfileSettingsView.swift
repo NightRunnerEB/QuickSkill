@@ -162,6 +162,7 @@ struct ProfileSettingsView: View {
                 })
             }
         }
+        .padding(.top, 1)
     }
 }
 

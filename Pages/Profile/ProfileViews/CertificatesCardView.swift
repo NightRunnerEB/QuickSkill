@@ -22,8 +22,8 @@ struct CertificatesCardView: View {
             if certificateVM.isLoading {
                 Group {
                     ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle()) // Для вращающегося индикатора
-                        .scaleEffect(2) // Увеличить размер, если нужно
+                        .progressViewStyle(CircularProgressViewStyle())
+                        .scaleEffect(2)
                     Text("Loading...")
                 }
             } else if let $certificates = certificateVM.certificates {
@@ -56,7 +56,7 @@ struct CertificatesCardView: View {
                                         VStack(alignment: .center) {
                                             Image(item.media)
                                             
-                                            Text(item.description) // Замените на ваше представление элемента
+                                            Text(item.description)
                                                 .font(Font.Poppins(size: 17))
                                         }
                                     }
@@ -89,8 +89,9 @@ struct CertificatesCardView: View {
                 Text("User data is unavailable. Error: \(certificateVM.errorMessage)")
             }
         }
-        .onAppear {
-            certificateVM.getCertificates()
-        }
     }
+}
+
+#Preview {
+    CertificatesCardView()
 }

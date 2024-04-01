@@ -16,9 +16,6 @@ struct MyHomeView: View {
     @State private var isShowingGetPro = false
     
     var body: some View {
-        if dailyTaskVM.isLoading || courseVM.isLoading || userVM.user == nil {
-            ProgressView("Loading...")
-        } else {
             NavigationView {
                 VStack {
                     HStack {
@@ -32,76 +29,87 @@ struct MyHomeView: View {
                     }
                     .padding(.trailing, 7)
                     
-                    ScrollView {
-                        RoundedRectangle(cornerRadius: 25, style: .continuous)
-                            .fill(Color.white)
-                            .frame(width: 358.81, height: 290)
-                            .shadow(
-                                color: Color(red: 0, green: 0, blue: 0, opacity: 0.15), radius: 4, y: 4
-                            )
-                            .overlay(content: {
-                                VStack(alignment: .leading, spacing: 12) {
-                                    HStack {
-                                        Text("Daily tasks")
-                                            .font(Font.Poppins(size: 24))
-                                        
-                                        Spacer()
-                                    }
-                                    .padding()
+                    ScrollView(.vertical, showsIndicators: false) {
+                        
+                        if dailyTaskVM.isLoading {
+                            HStack {
+                                Spacer()
+                                ProgressView("Loading...")
+                                Spacer()
+                            }
+                            .frame(height: 200)
+                        } else {
+                            VStack(alignment: .leading, spacing: 12) {
+                                
+                                HStack {
+                                    Text("Daily tasks")
+                                        .font(Font.Poppins(size: 24))
                                     
-                                    ForEach(dailyTaskVM.tasks) { task in
-                                        HStack {
-                                            Image(task.icon)
-                                                .resizable()
-                                                .frame(width: 45, height: 45)
+                                    Spacer()
+                                }
+                                .padding()
+                                
+                                ForEach($dailyTaskVM.tasks) { $task in
+                                    HStack {
+                                        Image(task.icon)
+                                            .resizable()
+                                            .frame(width: 45, height: 45)
+                                        
+                                        VStack(alignment: .leading) {
+                                            Text(task.description)
+                                                .font(Font.Poppins(size: 15))
                                             
-                                            VStack(alignment: .leading) {
-                                                Text(task.description)
-                                                    .font(Font.Poppins(size: 15))
+                                            HStack(spacing: 4) {
+                                                Text("\(task.currentValue)/\(task.targetValue)")
+                                                    .font(Font.custom("Inter", size: 12))
                                                 
-                                                HStack(spacing: 4) {
-                                                    Text("\(task.currentValue)/\(task.targetValue)")
-                                                        .font(Font.custom("Inter", size: 9))
+                                                ZStack(alignment: .leading) {
+                                                    RoundedRectangle(cornerRadius: 25)
+                                                        .frame(width: 177, height: 7.07)
+                                                        .opacity(0.3)
+                                                        .foregroundColor(Color.gray.opacity(0.5))
                                                     
-                                                    ZStack(alignment: .leading) {
-                                                        RoundedRectangle(cornerRadius: 25)
-                                                            .frame(width: 177, height: 7.07)
-                                                            .opacity(0.3)
-                                                            .foregroundColor(Color.gray.opacity(0.5))
-                                                        
-                                                        RoundedRectangle(cornerRadius: 25)
-                                                            .frame(width: CGFloat(task.currentValue / task.targetValue) * 177, height: 7.07)
-                                                            .foregroundColor(Color("Success-scale"))
-                                                            .animation(.linear, value: task.currentValue)
-                                                    }
+                                                    RoundedRectangle(cornerRadius: 25)
+                                                        .frame(width: CGFloat(task.currentValue / task.targetValue) * 177, height: 7.07)
+                                                        .foregroundColor(Color("Success-scale"))
+                                                        .animation(.linear, value: task.currentValue)
                                                 }
                                             }
                                         }
                                     }
-                                    .padding(.leading, 10)
-                                    
-                                    HStack {
-                                        Spacer()
-                                        
-                                        Button(action: {
-                                            isShowingGetPro = true
-                                        }, label: {
-                                            Text("Get x2 XP with Premium")
-                                                .font(Font.custom("Inter", size: 12).weight(.semibold))
-                                                .foregroundColor(.white)
-                                                .frame(width: 150, height: 34.32)
-                                                .background(Color("Subscribe"))
-                                                .cornerRadius(10.5)
-                                        })
-                                        .fullScreenCover(isPresented: $isShowingGetPro, content: {
-                                            GetProView()
-                                        })
-                                        
-                                        Spacer()
-                                    }
-                                    
                                 }
-                            })
+                                .padding(.leading, 10)
+                                
+                                HStack {
+                                    Spacer()
+                                    
+                                    Button(action: {
+                                        isShowingGetPro = true
+                                    }, label: {
+                                        Text("Get x2 XP with Premium")
+                                            .font(Font.custom("Inter", size: 12).weight(.semibold))
+                                            .foregroundColor(.white)
+                                            .frame(width: 150, height: 34.32)
+                                            .background(Color("Subscribe"))
+                                            .cornerRadius(10.5)
+                                    })
+                                    .fullScreenCover(isPresented: $isShowingGetPro, content: {
+                                        GetProView()
+                                    })
+                                    
+                                    Spacer()
+                                }
+                                
+                            }
+                            .padding(20)
+                            .background(Color.white)
+                            .cornerRadius(25)
+                            .shadow(
+                                color: Color(red: 0, green: 0, blue: 0, opacity: 0.17), radius: 4.84, y: 4.84
+                            )
+                            .padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
+                        }
+                        
                         
                         
                         RoundedRectangle(cornerRadius: 25, style: .continuous)
@@ -133,7 +141,7 @@ struct MyHomeView: View {
                                                 .foregroundColor(Color("Purple"))
                                                 .frame(width: 115, height: 47)
                                                 .background(.white)
-                                                .cornerRadius(10.51)
+                                                .cornerRadius(15)
                                         })
                                         .fullScreenCover(isPresented: $isShowingGoal, content: {
                                             GoalSettingView()
@@ -147,14 +155,13 @@ struct MyHomeView: View {
                                             .resizable()
                                             .frame(width: 45.41, height: 57.23)
                                         
-                                        Text("\(userVM.user.streak)/\(userVM.user.goalDay)")
+                                        Text("\(userVM.user.streak)/\(Int(userVM.user.goalDay))")
                                             .fontWeight(.bold)
                                         
                                         Text("The path to mastery")
                                     }
                                     .foregroundColor(.white)
                                     .multilineTextAlignment(.center)
-                                    .frame(width: 98, height: 155.23)
                                     .padding(.bottom, 5)
                                 }
                                     .padding()
@@ -171,47 +178,60 @@ struct MyHomeView: View {
                             }
                             .padding(.leading, 20)
                             
-                            ForEach($courseVM.courses, id: \.id) { course in
-                                
-                                NavigationLink(destination: CourseView(course: course), label: {
-                                    HStack {
-                                        Image(systemName: course.media.wrappedValue)
-                                            .resizable()
-                                            .frame(width: 55, height: 55)
-                                        
-                                        VStack(alignment: .leading) {
-                                            Text(course.name.wrappedValue)
-                                                .font(Font.custom("Poppins", size: 15))
-                                            
-                                            //                                            HStack(spacing: 4) {
-                                            //                                                Text("\(CGFloat(userVM.user.coursesSuccess[courseID]!) / (CGFloat( course.lecturesAndPractices.count) / 100), specifier: "%.0f")%")
-                                            //                                                    .font(Font.custom("Inter", size: 10))
-                                            //
-                                            //                                                ZStack(alignment: .leading) {
-                                            //                                                    RoundedRectangle(cornerRadius: 25)
-                                            //                                                        .frame(width: 177, height: 7.07)
-                                            //                                                        .opacity(0.3)
-                                            //                                                        .foregroundColor(Color.gray.opacity(0.5))
-                                            //
-                                            //                                                    RoundedRectangle(cornerRadius: 25)
-                                            //                                                        .frame(width: CGFloat(userVM.user.coursesSuccess[courseID]!) / CGFloat(course.lecturesAndPractices.count) * 177, height: 7.07)
-                                            //                                                        .foregroundColor(Color("Success-scale"))
-                                            //                                                }
-                                            //                                            }
-                                            
-                                        }
-                                        
-                                        Spacer()
-                                        
-                                        Image(systemName: "chevron.right")
-                                    }
-                                    .accentColor(.black)
-                                    .padding(16)
-                                    .frame(width: 355, height: 72)
-                                    .background(Color("Block"))
-                                    .cornerRadius(16)
+                            if courseVM.userCourses.isEmpty {
+                                HStack {
+                                    Spacer()
+                                    ProgressView("Loading...")
+                                    Spacer()
+                                }
+                                .frame(height: 200)
+                            } else {
+                                ForEach($courseVM.userCourses, id: \.id) { $course in
                                     
-                                })
+                                    NavigationLink(destination: CourseView(course: course)) {
+                                        HStack {
+                                            Image(course.media)
+                                                .resizable()
+                                                .frame(width: 45, height: 45)
+                                            
+                                            
+                                            // Progress Bar
+                                            VStack(alignment: .leading) {
+                                                Text(course.name)
+                                                    .font(Font.custom("Poppins", size: 15))
+                                                
+                                                HStack(spacing: 4) {
+                                                    Text("\(CGFloat(course.progress), specifier: "%.0f") %")
+                                                        .font(Font.custom("Inter", size: 10))
+                                                    
+                                                    ZStack(alignment: .leading) {
+                                                        Rectangle() // The track
+                                                            .foregroundColor(Color.gray.opacity(0.3))
+                                                            .frame(width: 200, height: 10)
+                                                            .cornerRadius(10)
+                                                        
+                                                        Rectangle() // The fill
+                                                            .foregroundColor(Color.green)
+                                                            .frame(width: CGFloat(Float(course.progress) / 100) * 200, height: 10)
+                                                            .cornerRadius(10)
+                                                            .animation(.linear, value: course.progress)
+                                                        
+                                                    }
+                                                }
+                                            }
+                                            
+                                            Spacer()
+                                            
+                                            Image(systemName: "chevron.right")
+                                        }
+                                        .accentColor(.black)
+                                        .padding(16)
+                                        .frame(width: 355, height: 72)
+                                        .background(Color("Block"))
+                                        .cornerRadius(16)
+                                        
+                                    }
+                                }
                             }
                         }
                         
@@ -232,7 +252,7 @@ struct MyHomeView: View {
                                                 .foregroundColor(.black)
                                         }
                                         Text("Discover your perfect course with QuickSkill's personalized recommendation quiz – unlock your learning journey today! ")
-                                            .font(Font.custom("Poppins", size: 17))
+                                            .font(Font.custom("Poppins", size: 14))
                                             .foregroundColor(Color(red: 0.24, green: 0.24, blue: 0.26).opacity(0.60))
                                             .multilineTextAlignment(.center)
                                     }
@@ -261,6 +281,7 @@ struct MyHomeView: View {
                         
                         Spacer()
                             .frame(height: 30)
+                        
                         VStack {
                             HStack {
                                 Text("Badges")
@@ -268,44 +289,54 @@ struct MyHomeView: View {
                                 
                                 Spacer()
                             }
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                LazyHGrid(rows: [
-                                    GridItem(.flexible(), spacing: 5),
-                                    GridItem(.flexible(), spacing: 0),
-                                ], spacing: 40, content: {
-                                    ForEach($badgeVM.badges, id: \.id) { badge in
-                                        HStack {
-                                            Image(badge.photo.wrappedValue)
-                                                .resizable()
-                                                .frame(width: 73, height: 73)
-                                            
-                                            VStack {
-                                                Text(badge.name.wrappedValue)
-                                                    .font(Font.custom("Inter", size: 18).weight(.semibold))
+                            
+                            if courseVM.isLoading {
+                                HStack {
+                                    Spacer()
+                                    ProgressView("Loading...")
+                                    Spacer()
+                                }
+                                .frame(height: 200)
+                            } else {
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    LazyHGrid(rows: [
+                                        GridItem(.flexible(), spacing: 5),
+                                        GridItem(.flexible(), spacing: 0),
+                                    ], spacing: 40, content: {
+                                        ForEach($badgeVM.badges, id: \.id) { badge in
+                                            HStack {
+                                                Image(badge.photo.wrappedValue)
+                                                    .resizable()
+                                                    .frame(width: 73, height: 73)
                                                 
-                                                Text(badge.taskToAchieve.wrappedValue)
-                                                    .font(Font.custom("Inter", size: 11))
-                                                    .foregroundColor(Color(red: 0.24, green: 0.24, blue: 0.26).opacity(0.60))
+                                                VStack {
+                                                    Text(badge.name.wrappedValue)
+                                                        .font(Font.custom("Inter", size: 18).weight(.semibold))
+                                                    
+                                                    Text(badge.taskToAchieve.wrappedValue)
+                                                        .font(Font.custom("Inter", size: 11))
+                                                        .foregroundColor(Color(red: 0.24, green: 0.24, blue: 0.26).opacity(0.60))
+                                                }
+                                                .frame(width: 180, height: 65)
                                             }
-                                            .frame(width: 180, height: 65)
+                                            .frame(height: 100)
                                         }
-                                        .frame(height: 100)
-                                    }
-                                })
+                                    })
+                                }
                             }
                         }
                         .padding()
                     }
                 }
             }
-            .onAppear{
-                badgeVM.getBadges()
-                dailyTaskVM.getTasks()
-                courseVM.getCourses()
-            }
+        .onAppear{
+            dailyTaskVM.getTasks()
+            badgeVM.getBadges()
+            courseVM.getUserCourses()
         }
     }
 }
+
 
 #Preview {
     return MyHomeView()

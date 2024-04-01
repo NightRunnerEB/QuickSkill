@@ -10,6 +10,7 @@ import SwiftUI
 struct LeaderBoardView: View {
     @ObservedObject var leagueVM: LeagueViewModel = LeagueViewModel()
     @EnvironmentObject var userVM: UserViewModel
+    @EnvironmentObject var courseVM: CourseViewModel
     
     enum RatingType {
         case weekly, friends
@@ -17,7 +18,6 @@ struct LeaderBoardView: View {
     
     @State private var selectedRating: RatingType = .weekly
     
-    var currentLeagueId: Int
     @State var currentIndex: Int = 0
     
     var body: some View {
@@ -27,7 +27,7 @@ struct LeaderBoardView: View {
             SnapCarousel(trailingSpace: 270, target: currentIndex, index: $currentIndex, items: League.leagues) { league in
                 
                 VStack {
-                    Image(systemName: league.leagueImage)
+                    Image(league.leagueImage)
                         .resizable()
                         .frame(width: 70, height: 70)
                         .aspectRatio(contentMode: .fit)
@@ -75,7 +75,8 @@ struct LeaderBoardView: View {
             if selectedRating == .weekly {
                 if leagueVM.isLoading {
                     ProgressView("Loading...")
-                } else {
+                    Spacer()
+                } else if !leagueVM.users.isEmpty {
                     List {
                         Section {
                             // Первые 5 пользователей
@@ -132,23 +133,24 @@ struct LeaderBoardView: View {
                         }
                         .listRowSeparator(.hidden)
                     }
+                } else {
+                    Text("Wait a bit, everything is ahead!")
                 }
                 
             } else {
                 if leagueVM.isLoading {
                     ProgressView("Loading...")
+                    Spacer()
+                        .frame(height: .infinity)
                 } else {
-                    if(leagueVM.followings.isEmpty) {
-                        Text("It looks like you're currently flying solo.\nAdd friends to make learning more enjoyable!")
-                            .font(Font.custom("Poppins", size: 17))
-                    } else {
+                    if let followings = leagueVM.followings {
                         List {
                             Section {
-                                ForEach(Array(leagueVM.followings.enumerated()), id: \.element.username) { index, user in
+                                ForEach(Array(followings.enumerated()), id: \.element.username) { index, user in
                                     VStack(spacing: 0) {
                                         LeaderboardFriendRow(user: user)
                                         
-                                        if index != leagueVM.followings.count - 1 {
+                                        if index != followings.count - 1 {
                                             Divider()
                                                 .padding(.leading, 10)
                                                 .padding(.trailing, 10)
@@ -159,14 +161,20 @@ struct LeaderBoardView: View {
                             }
                             .listRowSeparator(.hidden)
                         }
+                    } else {
+                        Text("It looks like you're currently flying solo.\nAdd friends to make learning more enjoyable!")
+                            .font(Font.custom("Poppins", size: 17))
+                        
+                        Spacer()
+                            .frame(height: .infinity)
                     }
                 }
             }
-            
         }
-        .onAppear(perform: {
+        .onAppear{
+            leagueVM.getLeague()
             currentIndex = userVM.user.xp / 1000
-        })
+        }
     }
 }
 

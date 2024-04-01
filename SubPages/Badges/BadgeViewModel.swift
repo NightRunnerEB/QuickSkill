@@ -18,25 +18,29 @@ final class BadgeViewModel: ObservableObject {
     
     func getBadges() {
         self.isLoading = true
-        let urlString = "https://localhost:8081/api/badges/user"
-        let token = KeychainManager().getUserToken()!
-        
-        NetworkService.shared.fetchData(from: urlString, token: token) { [weak self] (result: Result<[Badge]?, Error>) in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let dataModel):
-                    self?.badges = dataModel!
-                    self?.isLoading = false
-                case .failure(let error):
-                    if let afError = error.asAFError, let underlyingError = afError.underlyingError as NSError?, underlyingError.domain == NSURLErrorDomain, underlyingError.code == NSURLErrorTimedOut {
-                        // Ошибка тайм-аута
-                        self?.errorMessage = "Медленная скорость интернета!"
-                    } else {
-                        // Другие ошибки
-                        self?.errorMessage = "Ошибка при выполнении запроса: \(error.localizedDescription)"
-                    }
-                }
-            }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
+            badges = Badge.sampleData
+            self.isLoading = false
         }
+//        let urlString = "https://localhost:8081/api/badges/user"
+//        let token = KeychainManager().getUserToken()!
+//        
+//        NetworkService.shared.fetchData(from: urlString, token: token) { [weak self] (result: Result<[Badge]?, Error>) in
+//            DispatchQueue.main.async {
+//                switch result {
+//                case .success(let dataModel):
+//                    self?.badges = dataModel!
+//                    self?.isLoading = false
+//                case .failure(let error):
+//                    if let afError = error.asAFError, let underlyingError = afError.underlyingError as NSError?, underlyingError.domain == NSURLErrorDomain, underlyingError.code == NSURLErrorTimedOut {
+//                        // Ошибка тайм-аута
+//                        self?.errorMessage = "Медленная скорость интернета!"
+//                    } else {
+//                        // Другие ошибки
+//                        self?.errorMessage = "Ошибка при выполнении запроса: \(error.localizedDescription)"
+//                    }
+//                }
+//            }
+//        }
     }
 }

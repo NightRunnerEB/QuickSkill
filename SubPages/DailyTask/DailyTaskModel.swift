@@ -17,4 +17,10 @@ struct DailyTask: Identifiable, Codable {
     var isCompleted: Bool {
         currentValue >= targetValue
     }
+    
+    static let sampleData: [DailyTask] = [
+        DailyTask(id: 1, icon: "Task_5", description: "Read 3 topics", targetValue: 3),
+        DailyTask(id: 2, icon: "Task_5", description: "Log in to the app", targetValue: 1),
+        DailyTask(id: 3, icon: "Task_10", description: "Complete 5 lessons", targetValue: 5)
+    ]
 }

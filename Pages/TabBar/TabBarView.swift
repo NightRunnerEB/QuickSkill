@@ -10,13 +10,12 @@ import SwiftUI
 struct TabBarView: View {
     
     @EnvironmentObject var userVM: UserViewModel
+    @EnvironmentObject var courseVM: CourseViewModel
     @State private var selectedTab = "My Home"
     
-
+    
     var body: some View {
-        if userVM.isLoading {
-            ProgressView("Loading...")
-        } else if userVM.user != nil {
+        if userVM.user != nil {
             TabView(selection: $selectedTab) {
                 MyHomeView()
                     .tabItem {
@@ -24,17 +23,17 @@ struct TabBarView: View {
                     }
                     .tag("My Home")
                 
-                LeaderBoardView(currentLeagueId: /*userVM.user.xp / */1000)
+                LeaderBoardView()
                     .tabItem {
                         Label("Leader Board", image: "Stairs")
                     }
                     .tag("Leader Board")
                 
-                //            CourseView(course: Course.allCourses[Array(userVM.user.coursesSuccess.keys)[0]])
-                //                .tabItem {
-                //                    Label("Courses", image: "Rocket_bar")
-                //                }
-                //                .tag("Courses")
+                CourseView(course: courseVM.userCourses.first)
+                    .tabItem {
+                        Label("Courses", image: "Rocket_bar")
+                    }
+                    .tag("Courses")
                 
                 CommunityView()
                     .tabItem {
@@ -42,7 +41,7 @@ struct TabBarView: View {
                     }
                     .tag("Community")
                 
-                ProfileView(selectedTab: $selectedTab)
+                ProfileView()
                     .tabItem {
                         Label("Profile", systemImage: "person.crop.circle")
                     }

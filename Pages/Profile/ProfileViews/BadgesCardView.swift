@@ -15,7 +15,6 @@ struct BadgesCardView: View {
         let columns = [
             GridItem(.flexible(), spacing: 10),
             GridItem(.flexible(), spacing: 10),
-            GridItem(.flexible(), spacing: 10),
         ]
  
             if badgesVM.isLoading {
@@ -24,7 +23,7 @@ struct BadgesCardView: View {
                 VStack(spacing: 10) {
                     HStack {
                         VStack(alignment: .leading) {
-                            Text("Certificates")
+                            Text("Badges")
                                 .font(Font.custom("Poppins", size: 22).weight(.semibold))
                             
                             Text("View your progresss")
@@ -85,9 +84,13 @@ struct BadgesCardView: View {
                     }
                 }
             } else {
-                // Сообщение об отсутствии данных или ошибках
                 Text("No data available. Error: \(badgesVM.errorMessage)")
             }
         
     }
+}
+
+#Preview {
+    @StateObject var badgesVM = BadgeViewModel()
+    return BadgesCardView(badgesVM: badgesVM)
 }

@@ -11,7 +11,6 @@ struct LogInView: View {
     @EnvironmentObject var userVM: UserViewModel
     @State var email: String = ""
     @State var password: String = ""
-    @Environment(\.dismiss) var dismiss
     @FocusState private var focusedField: Field?
     
     enum Field {
@@ -21,26 +20,6 @@ struct LogInView: View {
     
     var body: some View {
         VStack(spacing: 10) {
-            
-            HStack {
-                Button(action: {
-                    dismiss()
-                }, label: {
-                    HStack(spacing: 0) {
-                        Rectangle()
-                            .foregroundColor(.clear)
-                            .background(Image(systemName: "chevron.left"))
-                            .frame(width: 20, height: 20)
-                        Text("Back")
-                            .font(Font.Poppins(size: 16))
-                            .foregroundColor(Color("Purple"))
-                    }
-                    .frame(width: 60, height: 20)
-                })
-                .padding(.leading, 15)
-                
-                Spacer()
-            }
             
           VStack(spacing: 8) {
             Text("👋")
@@ -64,6 +43,9 @@ struct LogInView: View {
                     .keyboardType(.emailAddress)
                     .submitLabel(.next)
                     .onSubmit { focusedField = .password }
+                    .onChange(of: email) { newValue in
+                        email = newValue.lowercased()
+                    }
                     .font(Font.custom("Poppins", size: 17))
                 
                 Button(action: {
@@ -141,6 +123,7 @@ struct LogInView: View {
                 .background(Color(red: 0.41, green: 0.05, blue: 0.92))
                 .cornerRadius(24)
             })
+            .disabled(email.isEmpty || password.isEmpty)
         }
 
         if let errorMessage = userVM.errorMessage {

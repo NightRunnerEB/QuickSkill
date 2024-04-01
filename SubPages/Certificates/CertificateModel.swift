@@ -13,3 +13,11 @@ struct Certificate: Identifiable, Codable {
     let media: String
     let description: String
 }
+
+extension Certificate {
+    static let certificates = [
+        Certificate(id: 1, name: "Web Development", media: "C++_icon", description: "Learn full stack web development."),
+        Certificate(id: 2, name: "Data Science", media: "C#_icon", description: "Master the fundamentals of data analysis."),
+        Certificate(id: 3, name: "AI and Machine Learning", media: "C++_icon", description: "Dive into the world of artificial intelligence.")
+    ]
+}

@@ -83,7 +83,7 @@ struct PresentationView: View {
                     }
                     
                     Button(action: {
-                        isShowingRegistr = true
+                        isShowingLogIn = true
                     }, label: {
                         Text("Log In")
                             .font(Font.custom("Poppins", size: 17).weight(.semibold))

@@ -18,3 +18,8 @@ struct LoginData: Encodable {
     var email: String
     var password: String
 }
+
+struct AuthResponse: Decodable {
+    let accessToken: String
+    let refreshToken: String
+}

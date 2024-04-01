@@ -8,10 +8,9 @@
 import Foundation
 
 // Модель для практического занятия
-struct Practice: Identifiable, Codable {
+struct Practice: Identifiable, Decodable {
     var id = UUID()
     var title: String
     var description: String
-    var tasks: [Task]
     var numberOfCorrectAnswers: Int
 }

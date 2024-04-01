@@ -48,15 +48,14 @@ struct SheetBattery: View {
     var body: some View {
         VStack(spacing: 7) {
             
-            Image("Battery")
-                .resizable()
-                .frame(width: 32, height: 59)
+            Text("❤️")
+                .font(.largeTitle)
             
-            Text("Battery")
+            Text("Heart")
                 .font(Font.Poppins(size: 20).weight(.light))
             .foregroundColor(.black)
             
-            Text("Batteries allow you to learn.\nNo batteries - no practice.")
+            Text("Hearts allow you to learn.\nNo hearts - no practice.")
                 .multilineTextAlignment(.center)
             .font(Font.custom("Poppins", size: 13).weight(.medium))
             .foregroundColor(Color.gray)

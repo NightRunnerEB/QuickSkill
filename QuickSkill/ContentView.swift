@@ -10,6 +10,7 @@ import PartialSheet
 
 struct ContentView: View {
     @AppStorage("isUserAuthenticated") var isUserAuthenticated: Bool = false
+    @AppStorage("NotificationPermission") var isNotificationPermitted: Bool = false
     @EnvironmentObject var userVM: UserViewModel
     
     var body: some View {
