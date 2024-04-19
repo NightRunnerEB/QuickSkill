@@ -20,4 +20,5 @@
 Для сборки проекта необходимо:
 1. Клонировать репозиторий:
 ```bash
-git clone https://github.com/NightRunnerEB/QuickSkill_IOS.git
+git clone https://github.com/NightRunnerEB/QuickSkill.git
+
