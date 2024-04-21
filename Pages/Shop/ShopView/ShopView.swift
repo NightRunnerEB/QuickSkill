@@ -91,7 +91,7 @@ struct ShopView: View {
                                                 Image("Dotted_line")
                                                 
                                                 HStack(spacing: -3) {
-                                                    Text("\(userVM.user.energy)")
+                                                    Text("\(userVM.user.hearts)")
                                                         .font(Font.Poppins(size: 16.50).weight(.medium))
                                                         .foregroundStyle(Color("Purple"))
                                                     
@@ -134,7 +134,7 @@ struct ShopView: View {
                                                 
                                                 Image("Dotted_line")
                                                 
-                                                Text("\(userVM.user.crystals)")
+                                                Text("\(userVM.user.crystall)")
                                                     .font(Font.Poppins(size: 16.50).weight(.medium))
                                                     .foregroundStyle(Color("Purple"))
                                             }
@@ -168,7 +168,7 @@ struct ShopView: View {
                                                 
                                                 Image("Dotted_line")
                                                 
-                                                Text("\(userVM.user.streakSavers)")
+                                                Text("\(userVM.user.freezer)")
                                                     .font(Font.Poppins(size: 16.50).weight(.medium))
                                                     .foregroundStyle(Color("Purple"))
                                             }
@@ -681,7 +681,7 @@ struct ShopView: View {
                             //MARK: Crystalls card two
                             Button(action: {
                                 self.selectedShopItem = .crystalls_2
-                                userVM.user.crystals += 500
+                                userVM.user.crystall += 500
                             }, label: {
                                 ZStack {
                                     Rectangle()
@@ -796,29 +796,29 @@ struct ShopView: View {
                     primaryButton: .cancel(Text("Confirm")) {
                         switch item {
                         case .oneHeart:
-                            userVM.user.energy += 1
-                            userVM.user.crystals -= 500
+                            userVM.user.hearts += 1
+                            userVM.user.crystall -= 500
                         case .twoHearts:
-                            userVM.user.energy += 2
-                            userVM.user.crystals -= 750
+                            userVM.user.hearts += 2
+                            userVM.user.crystall -= 750
                         case .fiveHearts:
-                            userVM.user.energy += 5
-                            userVM.user.crystals -= 2000
+                            userVM.user.hearts += 5
+                            userVM.user.crystall -= 2000
                         case .oneSaver:
-                            userVM.user.streakSavers += 3
-                            userVM.user.crystals -= 500
+                            userVM.user.freezer += 3
+                            userVM.user.crystall -= 500
                         case .twoSaver:
-                            userVM.user.streakSavers += 5
-                            userVM.user.crystals -= 700
+                            userVM.user.freezer += 5
+                            userVM.user.crystall -= 700
                         case .threeSaver:
-                            userVM.user.streakSavers += 10
-                            userVM.user.crystals -= 1000
+                            userVM.user.freezer += 10
+                            userVM.user.crystall -= 1000
                         case .crystalls_1:
-                            userVM.user.crystals += 100
+                            userVM.user.crystall += 100
                         case .crystalls_2:
-                            userVM.user.crystals += 500
+                            userVM.user.crystall += 500
                         case .crystalls_3:
-                            userVM.user.crystals += 1000
+                            userVM.user.crystall += 1000
                         }
                         purchaseItem(item)
                     },
@@ -833,7 +833,7 @@ struct ShopView: View {
     }
     
     private func purchaseItem(_ item: ShopEndpoint) {
-        // Здесь логика для выполнения покупки, возможно, с отправкой запроса на сервер
+        // Здесь логика для выполнения покупки с отправкой запроса на сервер
         print("Purchasing from \(item)")
     }
 }

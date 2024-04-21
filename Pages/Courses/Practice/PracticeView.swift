@@ -56,7 +56,9 @@ struct PracticeView: View {
                                     } else {
                                         error = false
                                         progress += 1 / Double(quizVM.questions!.count)
-                                        quizVM.checkAnswer()
+                                        if !quizVM.checkAnswer() {
+                                            userVM.user.hearts -= 1
+                                        }
                                     }
                                 }
                                 .buttonStyle(PrimaryButtonStyle())
@@ -123,7 +125,7 @@ struct HeaderView: View {
                 label: {
                     HStack {
                         Text("❤️")
-                        Text("\(userVM.user.energy)")
+                        Text("\(userVM.user.hearts)")
                     }
                     .frame(width: 70)
                 })
@@ -280,7 +282,6 @@ struct QuizResultView: View {
         )
         .onAppear{
             userVM.addResults(xp: score, crystals: crystals)
-            userVM.user.energy -= 1
         }
     }
 }
@@ -342,11 +343,6 @@ struct SecondaryButtonStyle: ButtonStyle {
             .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
     }
 }
-//
-//#Preview {
-//    PracticeView()
-//        .environmentObject(UserViewModel())
-//}
 
 #Preview {
     QuizResultView(score: 3000, crystals: 200, success: 40)

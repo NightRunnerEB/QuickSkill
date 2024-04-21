@@ -16,49 +16,49 @@ final class PostViewModel: ObservableObject {
     @Published var posts : [Post] = []
     
     func getPosts() {
-        self.isLoading = true
+        //        self.isLoading = true
         //        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
         //            // Для тестов
         //        }
         //        self.isLoading = false
         
-        let urlString = "https://localhost:8081/api/discussion"
+        let parameters: Parameters = ["page": 0, "pageSize": 3]
+        let urlString = "https://localhost:443/api/social/discussion"
         
-        NetworkService.shared.performRequest(to: urlString, method: .get) { [weak self] (result: Result<[Post], Error>) in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let dataModel):
-                    self?.posts = dataModel
-                    self?.isLoading = false
-                case .failure(let error):
-                    if let afError = error.asAFError, let underlyingError = afError.underlyingError as NSError?, underlyingError.domain == NSURLErrorDomain, underlyingError.code == NSURLErrorTimedOut {
-                        // Ошибка тайм-аута
-                        self?.errorMessage = "Медленная скорость интернета!"
-                    } else {
-                        // Другие ошибки
-                        self?.errorMessage = "Ошибка при выполнении запроса: \(error.localizedDescription)"
-                    }
+        NetworkService.shared.performGETRequest(to: urlString, parameters: parameters) { [weak self] (result: Result<[Post], Error>) in
+            switch result {
+            case .success(let dataModel):
+                print("Успех")
+                print(dataModel)
+                self?.posts = dataModel
+            case .failure(let error):
+                if let afError = error.asAFError, let underlyingError = afError.underlyingError as NSError?, underlyingError.domain == NSURLErrorDomain, underlyingError.code == NSURLErrorTimedOut {
+                    // Ошибка тайм-аута
+                    self?.errorMessage = "Медленная скорость интернета!"
+                } else {
+                    // Другие ошибки
+                    self?.errorMessage = "Ошибка при выполнении запроса: \(error.localizedDescription)"
                 }
+
             }
         }
     }
     
-    func makePost(topic: String, description: String, completion: @escaping () -> Void) {
-        self.isLoading = true
+    func makePost(topic: String, description: String) {
+        //        self.isLoading = true
         //        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
         //            posts.append(Post(discussion: Discussion(id: 5, title: topic, body: description, date: "2024/04/15", likes: 0, countAnswers: 0), author: Author(id: 15, icon: "Окунь", firstName: "Seif", lastName: "Kabum")))
         //            completion()
         //            self.isLoading = false
         //        }
         
-        let urlString = "https://localhost:8081/api/discussion"
-        let parametr = ["topic": topic, "description": description]
+        let urlString = "https://localhost:443/api/social/discussion"
+        let parameters : Parameters = ["topic": topic, "body": description, "userId": 0]
         
-        NetworkService.shared.performRequest(to: urlString, method: .post, parameters: parametr) { [weak self] (result: Result<EmptyResponse, Error>) in
-            DispatchQueue.main.async {
+        NetworkService.shared.performRequest(to: urlString, method: .post, parameters: parameters) { [weak self] (result: Result<EmptyResponse, Error>) in
                 switch result {
                 case .success:
-                    self?.isLoading = false
+                    return
                 case .failure(let error):
                     if let afError = error.asAFError, let underlyingError = afError.underlyingError as NSError?, underlyingError.domain == NSURLErrorDomain, underlyingError.code == NSURLErrorTimedOut {
                         // Ошибка тайм-аута
@@ -68,7 +68,6 @@ final class PostViewModel: ObservableObject {
                         self?.errorMessage = "Ошибка при выполнении запроса: \(error.localizedDescription)"
                     }
                 }
-            }
         }
     }
 }

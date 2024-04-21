@@ -102,7 +102,6 @@
 		676FBAE92BB1F5E600B1EDB5 /* SheetStreak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676FBAE82BB1F5E600B1EDB5 /* SheetStreak.swift */; };
 		676FBAEB2BB2354000B1EDB5 /* CustomSearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676FBAEA2BB2354000B1EDB5 /* CustomSearchBarView.swift */; };
 		676FBAED2BB23C2500B1EDB5 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676FBAEC2BB23C2500B1EDB5 /* FilterView.swift */; };
-		676FBAEF2BB24DAA00B1EDB5 /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676FBAEE2BB24DAA00B1EDB5 /* ConfirmationView.swift */; };
 		676FBAF32BB475CF00B1EDB5 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676FBAF22BB475CF00B1EDB5 /* NetworkService.swift */; };
 		676FBAF52BB4EB5700B1EDB5 /* BadgeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676FBAF42BB4EB5700B1EDB5 /* BadgeViewModel.swift */; };
 		676FBAF72BB4F03300B1EDB5 /* LeagueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676FBAF62BB4F03300B1EDB5 /* LeagueViewModel.swift */; };
@@ -238,7 +237,6 @@
 		676FBAE82BB1F5E600B1EDB5 /* SheetStreak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetStreak.swift; sourceTree = "<group>"; };
 		676FBAEA2BB2354000B1EDB5 /* CustomSearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBarView.swift; sourceTree = "<group>"; };
 		676FBAEC2BB23C2500B1EDB5 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
-		676FBAEE2BB24DAA00B1EDB5 /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
 		676FBAF22BB475CF00B1EDB5 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		676FBAF42BB4EB5700B1EDB5 /* BadgeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeViewModel.swift; sourceTree = "<group>"; };
 		676FBAF62BB4F03300B1EDB5 /* LeagueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueViewModel.swift; sourceTree = "<group>"; };
@@ -698,7 +696,6 @@
 			isa = PBXGroup;
 			children = (
 				675ED28C2B77B74C0039F0E9 /* ShopView */,
-				676FBAEE2BB24DAA00B1EDB5 /* ConfirmationView.swift */,
 			);
 			path = Shop;
 			sourceTree = "<group>";
@@ -1014,7 +1011,6 @@
 				67CBF5032BC3EDB800B83851 /* PostViewModel.swift in Sources */,
 				674A60D92B8E56F500D21116 /* CourseItemView.swift in Sources */,
 				67CBF5072BC4048400B83851 /* AnswerViewModel.swift in Sources */,
-				676FBAEF2BB24DAA00B1EDB5 /* ConfirmationView.swift in Sources */,
 				674A60912B84D54700D21116 /* ResetPasswordView.swift in Sources */,
 				674A604B2B82C26600D21116 /* PresentationView.swift in Sources */,
 				67CAF52A2BA3F4E900A44658 /* Structs.swift in Sources */,

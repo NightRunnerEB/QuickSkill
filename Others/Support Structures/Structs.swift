@@ -8,8 +8,8 @@
 import Foundation
 
 struct RegistrationData: Encodable {
-    var firstName: String
-    var lastName: String
+    var firstname: String
+    var lastname: String
     var email: String
     var password: String
 }
@@ -19,7 +19,7 @@ struct LoginData: Encodable {
     var password: String
 }
 
-struct AuthResponse: Decodable {
+struct AuthResponse: Encodable {
     let accessToken: String
     let refreshToken: String
 }

@@ -117,6 +117,7 @@ struct DeleteAccountView: View {
                     
                     
                     Button(action: {
+                        userVM.isLoading = false
                         self.isUserAuthenticated = false
                         // удалить аккаунт
                     }, label: {

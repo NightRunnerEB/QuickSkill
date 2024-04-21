@@ -12,6 +12,7 @@ struct ContentView: View {
     @AppStorage("isUserAuthenticated") var isUserAuthenticated: Bool = false
     @AppStorage("NotificationPermission") var isNotificationPermitted: Bool = false
     @EnvironmentObject var userVM: UserViewModel
+    @StateObject var courseVM = CourseViewModel()
     
     var body: some View {
         Group {
@@ -20,6 +21,7 @@ struct ContentView: View {
                     .onAppear {
                         userVM.getInfo()
                     }
+                    .environmentObject(courseVM)
             } else {
                 PresentationView()
             }

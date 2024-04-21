@@ -9,6 +9,7 @@ import SwiftUI
 
 struct NewAnswerView: View {
     @ObservedObject var answerVM: AnswerViewModel
+    let discussionId: Int
     @Binding var isPresenting: Bool
     @State private var newAnswer: String = ""
     
@@ -60,14 +61,13 @@ struct NewAnswerView: View {
             
             // Answer Button
             Button(action: {
-                answerVM.makeAnswer(content: newAnswer){
-                    isPresenting = false
-                }
+                answerVM.makeAnswer(discussionId: discussionId, body: newAnswer)
+                isPresenting = false
             }) {
-                if answerVM.isLoading {
-                    ProgressView()
-                        .frame(width: 150, height: 45)
-                } else {
+//                if answerVM.isLoading {
+//                    ProgressView()
+//                        .frame(width: 150, height: 45)
+//                } else {
                     Text("Answer")
                         .font(Font.Poppins(size: 15.73))
                         .foregroundColor(.white)
@@ -75,8 +75,8 @@ struct NewAnswerView: View {
                         .frame(width: 100, height: 45)
                         .background(Color("Purple"))
                         .cornerRadius(16.52)
-                    
-                }
+//                    
+//                }
             }
             .padding(10)
         }

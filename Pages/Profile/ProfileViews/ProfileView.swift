@@ -22,10 +22,23 @@ struct ProfileView: View {
                             HStack(alignment: .top) {
                                 Spacer()
                                 
-                                Image(userVM.user.photo)
-                                    .resizable()
-                                    .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                                if let photo = userVM.user.photo {
+                                    AsyncImage(url: URL(string: photo)) { image in
+                                        image
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                    } placeholder: {
+                                        ProgressView()
+                                    }
                                     .frame(width: 64, height: 64)
+                                    .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                                } else {
+                                    Image(systemName: "person.circle")
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 34, height: 34)
+                                        .clipShape(Circle())
+                                }
                                 
                                 VStack(alignment: .leading, spacing: 6) {
                                     Text(userVM.user.firstName + " " + userVM.user.lastName)
@@ -51,13 +64,13 @@ struct ProfileView: View {
                                 
                                 Image("User Account")
                                 
-                                Text("\(userVM.user.followers) followers")
+                                Text("0 followers")
                                 
                                 Spacer()
                                 
                                 Image("User Account")
                                 
-                                Text("\(userVM.user.followings) followings")
+                                Text("0 followings")
                                 
                                 Spacer()
                             }
@@ -87,7 +100,7 @@ struct ProfileView: View {
                         
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 16) {
-                                CalendarCardView(streak: userVM.user.streak, streakRecord: userVM.user.streakRecord)
+                                CalendarCardView(streak: userVM.user.streak, streakRecord: userVM.user.maxStreak)
                                 
                                 QuickyCardView(experience: userVM.user.xp)
                                 

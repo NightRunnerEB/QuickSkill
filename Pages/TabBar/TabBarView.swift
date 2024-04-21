@@ -49,7 +49,7 @@ struct TabBarView: View {
             }
             .accentColor(.purple) // Цвет активной вкладки
         } else {
-            Text(userVM.errorMessage!)
+            Text(userVM.errorMessage ?? "Ошибка получения данных о пользователе")
         }
     }
 }

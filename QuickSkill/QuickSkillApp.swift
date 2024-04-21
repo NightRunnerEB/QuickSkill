@@ -11,13 +11,11 @@ import SwiftUI
 struct QuickSkillApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject var userVM = UserViewModel()
-    @StateObject var courseVM = CourseViewModel()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(userVM)
-                .environmentObject(courseVM)
         }
     }
 }

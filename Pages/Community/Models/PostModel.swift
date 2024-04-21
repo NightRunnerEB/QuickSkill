@@ -7,8 +7,7 @@
 
 import Foundation
 
-struct Post: Identifiable, Decodable {
-    let id: Int
+struct Post: Decodable {
     let discussion: Discussion
     let author: Author
     

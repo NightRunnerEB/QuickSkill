@@ -7,183 +7,171 @@ struct CommunityView: View {
     @StateObject var postVM: PostViewModel = PostViewModel()
     
     var body: some View {
-        Group {
-            if postVM.isLoading {
-                ProgressView("Loading...")
-            } else if let errorMessage = postVM.errorMessage {
-                Text("An error occurred: \(errorMessage)")
-            } else {
-                NavigationView {
-                    ZStack(alignment: .bottom){
+        NavigationView {
+            ZStack(alignment: .bottom){
+                VStack {
+                    
+                    Text("Community👥")
+                        .font(Font.custom("Poppins", size: 22).weight(.semibold))
+                        .foregroundColor(.black)
+                        .offset(x: -100, y: 10)
+                    
+                    HStack(spacing: 16) {
+                        Text("Follow QuickSkill:")
+                            .font(Font.custom("Poppins", size: 14))
+                        
+                        HStack(alignment: .center, spacing: 10) {
+                            
+                            Button(action: openDiscord) {
+                                Image("Discord Icon")
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .frame(width: 34.40, height: 34.40)
+                                    .background(Circle()
+                                        .fill(Color("Purple")))
+                            }
+                            
+                            Button(action: openDeveloperTelegram) {
+                                Image("Telegram Icon")
+                                    .resizable()
+                                    .frame(width: 22, height: 20)
+                                    .padding()
+                                    .frame(width: 32.5, height: 32.5)
+                                    .clipShape(Circle())
+                                    .overlay(Circle().stroke(Color("Purple"), lineWidth: 1))
+                            }
+                        }
+                        
+                        Spacer()
+                    }
+                    .padding(EdgeInsets(top: 6, leading: 20, bottom: 18, trailing: 0))
+                    
+                    VStack(alignment: .leading, spacing: 16) {
+                        
+                        HStack {
+                            
+                            Button(action: {
+                                
+                            }, label: {
+                                Image("Lupa")
+                                    .resizable()
+                                    .frame(width: 21, height: 21)
+                            })
+                            
+                            TextField("Search question", text: $text)
+                        }
+                        .padding(EdgeInsets(top: 10, leading: 16, bottom: 10, trailing: 9))
+                        .frame(width: 354, height: 39)
+                        .background(Color(red: 0.91, green: 0.91, blue: 0.92))
+                        .cornerRadius(15)
+                        
+                        HStack {
+                            
+                            HStack(alignment: .top, spacing: 4) {
+                                HStack(spacing: 4) {
+                                    Text("Popular")
+                                        .font(Font.custom("Poppins", size: 12))
+                                        .foregroundColor(.white)
+                                    
+                                    Image(systemName: "chevron.down")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .foregroundStyle(.white)
+                                        .frame(width: 12, height: 12)
+                                }
+                                .padding(EdgeInsets(top: 4, leading: 12, bottom: 4, trailing: 12))
+                                .background(Color("Purple"))
+                                .cornerRadius(15)
+                            }
+                            
+                            Spacer()
+                            
+                            Text("\(postVM.posts.count) discussions")
+                                .font(Font.custom("Poppins", size: 12))
+                                .foregroundColor(.black)
+                        }
+                    }
+                    .padding(EdgeInsets(top: 0, leading: 20, bottom: 6, trailing: 20))
+                    
+                    ScrollView(.vertical, showsIndicators: false) {
+                        // Section for discussions
+                        VStack(spacing: 18) {
+                            ForEach($postVM.posts, id: \.discussion.id) { $post in
+                                DiscussionCell(post: post)
+                            }
+                            .padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
+                        }
+                        
+                    }
+                    .refreshable {
+                        postVM.getPosts()
+                    }
+                    
+                    // New Discussion Button
+                    Button(action: {
+                        withAnimation(.easeInOut(duration: 0.4)) {
+                            self.isCreatingNewDiscussion = true
+                        }
+                    }) {
+                        ZStack() {
+                            
+                            Rectangle()
+                                .foregroundColor(.clear)
+                                .frame(width: 150, height: 45)
+                                .background(Color("Purple"))
+                                .cornerRadius(16.52)
+                            
+                            HStack {
+                                Image(systemName: "plus")
+                                Text("New discuss")
+                            }
+                            .font(Font.Poppins(size: 15.73))
+                            .foregroundColor(.white)
+                        }
+                    }
+                }
+                .blur(radius: isCreatingNewDiscussion ? 5 : 0)
+                
+                if isCreatingNewDiscussion {
+                    GeometryReader { geometry in
                         VStack {
                             
-                            Text("Community👥")
-                                .font(Font.custom("Poppins", size: 22).weight(.semibold))
-                                .foregroundColor(.black)
-                                .offset(x: -100, y: 10)
+                            Spacer()
                             
-                            HStack(spacing: 16) {
-                                Text("Follow QuickSkill:")
-                                    .font(Font.custom("Poppins", size: 14))
+                            HStack {
+                                Spacer()
                                 
-                                HStack(alignment: .center, spacing: 10) {
-                                    
-                                    Button(action: openDiscord) {
-                                        Image("Discord Icon")
-                                            .foregroundColor(.white)
-                                            .padding()
-                                            .frame(width: 34.40, height: 34.40)
-                                            .background(Circle()
-                                                .fill(Color("Purple")))
-                                    }
-                                    
-                                    Button(action: openDeveloperTelegram) {
-                                        Image("Telegram Icon")
-                                            .resizable()
-                                            .frame(width: 22, height: 20)
-                                            .padding()
-                                            .frame(width: 32.5, height: 32.5)
-                                            .clipShape(Circle())
-                                            .overlay(Circle().stroke(Color("Purple"), lineWidth: 1))
-                                    }
-                                }
+                                NewPostView(isPresented: $isCreatingNewDiscussion, postVM: postVM)
+                                    .frame(width: geometry.size.width * 0.9, height: geometry.size.height * 0.95)
+                                    .background(Color.white)
+                                    .cornerRadius(20)
+                                    .shadow(radius: 5)
                                 
                                 Spacer()
                             }
-                            .padding(EdgeInsets(top: 6, leading: 20, bottom: 18, trailing: 0))
-                            
-                            VStack(alignment: .leading, spacing: 16) {
-                                
-                                HStack {
-                                    
-                                    Button(action: {
-                                        
-                                    }, label: {
-                                        Image("Lupa")
-                                            .resizable()
-                                            .frame(width: 21, height: 21)
-                                    })
-                                    
-                                    TextField("Search question", text: $text)
-                                }
-                                .padding(EdgeInsets(top: 10, leading: 16, bottom: 10, trailing: 9))
-                                .frame(width: 354, height: 39)
-                                .background(Color(red: 0.91, green: 0.91, blue: 0.92))
-                                .cornerRadius(15)
-                                
-                                HStack {
-                                    
-                                    HStack(alignment: .top, spacing: 4) {
-                                        HStack(spacing: 4) {
-                                            Text("Popular")
-                                                .font(Font.custom("Poppins", size: 12))
-                                                .foregroundColor(.white)
-                                            
-                                            Image(systemName: "chevron.down")
-                                                .resizable()
-                                                .scaledToFit()
-                                                .foregroundStyle(.white)
-                                                .frame(width: 12, height: 12)
-                                        }
-                                        .padding(EdgeInsets(top: 4, leading: 12, bottom: 4, trailing: 12))
-                                        .background(Color("Purple"))
-                                        .cornerRadius(15)
-                                    }
-                                    
-                                    Spacer()
-                                    
-                                    Text("\(postVM.posts.count) discussions")
-                                        .font(Font.custom("Poppins", size: 12))
-                                        .foregroundColor(.black)
-                                }
-                            }
-                            .padding(EdgeInsets(top: 0, leading: 20, bottom: 6, trailing: 20))
-                            
-                            ScrollView(.vertical, showsIndicators: false) {
-                                // Section for discussions
-                                VStack(spacing: 18) {
-                                    ForEach($postVM.posts) { $post in
-                                        DiscussionCell(post: post)
-                                    }
-                                    .padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
-                                }
-                                
-                            }
-                            .refreshable {
-                                getPosts()
-                            }
-                            
-                            // New Discussion Button
-                            Button(action: {
-                                withAnimation(.easeInOut(duration: 0.4)) {
-                                    self.isCreatingNewDiscussion = true
-                                }
-                            }) {
-                                ZStack() {
-                                    
-                                    Rectangle()
-                                        .foregroundColor(.clear)
-                                        .frame(width: 150, height: 45)
-                                        .background(Color("Purple"))
-                                        .cornerRadius(16.52)
-                                    
-                                    HStack {
-                                        Image(systemName: "plus")
-                                        Text("New discuss")
-                                    }
-                                    .font(Font.Poppins(size: 15.73))
-                                    .foregroundColor(.white)
-                                }
-                            }
                         }
-                        .blur(radius: isCreatingNewDiscussion ? 5 : 0)
                         
-                        if isCreatingNewDiscussion {
-                            GeometryReader { geometry in
-                                VStack {
-                                    
-                                    Spacer()
-                                    
-                                    HStack {
-                                        Spacer()
-                                        
-                                        NewPostView(isPresented: $isCreatingNewDiscussion, postVM: postVM)
-                                            .frame(width: geometry.size.width * 0.9, height: geometry.size.height * 0.95)
-                                            .background(Color.white)
-                                            .cornerRadius(20)
-                                            .shadow(radius: 5)
-                                        
-                                        Spacer()
-                                    }
-                                }
-                                
-                            }
-                            .background(
-                                Color.white.opacity(0.1)
-                                    .edgesIgnoringSafeArea(.all)
-                                    .onTapGesture {
-                                        isCreatingNewDiscussion = false
-                                    }
-                            )
-                        }
                     }
+                    .background(
+                        Color.white.opacity(0.1)
+                            .edgesIgnoringSafeArea(.all)
+                            .onTapGesture {
+                                isCreatingNewDiscussion = false
+                            }
+                    )
                 }
             }
         }
         .onAppear() {
-            getPosts()
+            postVM.getPosts()
         }
-    }
-    
-    func getPosts() {
-        postVM.getPosts()
     }
     
     func openDeveloperTelegram() {
         let telegramUsername = "EvgeniyB2077"
         let appURL = URL(string: "tg://resolve?domain=\(telegramUsername)")!
         let webURL = URL(string: "https://t.me/\(telegramUsername)")!
-
+        
         if UIApplication.shared.canOpenURL(appURL) {
             UIApplication.shared.open(appURL, options: [:], completionHandler: nil)
         } else {
@@ -229,12 +217,12 @@ struct DiscussionCell: View {
                                     Image("Comments_2")
                                     
                                     
-                                    Text("\(post.discussion.countAnswers)")
+                                    Text("\(post.discussion.answersCount)")
                                         .font(Font.custom("Poppins", size: 9.68))
                                 }
                                 .frame(width: 36.20, height: 21.78)
                                 
-                                Text(post.discussion.date)
+                                Text(post.discussion.publishedOn.prefix(10))
                                     .font(Font.custom("Poppins", size: 9.68))
                             }
                         }
@@ -243,11 +231,23 @@ struct DiscussionCell: View {
                     Spacer()
                     
                     VStack(alignment: .trailing, spacing: 10) {
-                        Image(post.author.icon)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 32, height: 32)
+                        if let photo = post.author.photo {
+                            AsyncImage(url: URL(string: photo)) { image in
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                            } placeholder: {
+                                ProgressView()
+                            }
+                            .frame(width: 34, height: 34)
                             .clipShape(Circle())
+                        } else {
+                            Image(systemName: "person.circle")
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 34, height: 34)
+                                .clipShape(Circle())
+                        }
                         
                         Text(post.author.fullName)
                             .font(Font.custom("Poppins", size: 9.68))

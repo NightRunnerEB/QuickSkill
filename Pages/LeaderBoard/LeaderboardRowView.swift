@@ -13,21 +13,17 @@ struct LeaderboardFriendRow: View {
     
     var body: some View {
         HStack {
-                    
-            Image(user.photo)
+            
+            Image(systemName: "person.circle")
                 .resizable()
-                .clipShape(Rectangle())
+                .scaledToFill()
+                .clipShape(Circle())
                 .cornerRadius(10.91)
-                .overlay(
-                  RoundedRectangle(cornerRadius: 10.91)
-                    .inset(by: 1.2)
-                    .stroke(Color(red: 1, green: 1, blue: 1), lineWidth: 1.2)
-                )
                 .shadow(
-                  color: Color(red: 1, green: 1, blue: 1, opacity: 1), radius: 4
+                    color: Color(red: 1, green: 1, blue: 1, opacity: 1), radius: 4
                 )
-                .frame(width: 55, height: 55)
-                
+            
+            
             Text(user.firstName + " " + user.lastName)
                 .font(Font.custom("Poppins", size: 17).weight(.medium))
                 .padding(.leading, 4)
@@ -67,25 +63,24 @@ struct LeaderboardRow: View {
     var body: some View {
         
         HStack {
-            Image(user.photo)
+            
+            Image(systemName: "person.circle")
                 .resizable()
-                .clipShape(Rectangle())
+                .scaledToFill()
+                .clipShape(Circle())
                 .cornerRadius(10.91)
-                .overlay(
-                  RoundedRectangle(cornerRadius: 10.91)
-                    .inset(by: 1.2)
-                    .stroke(strokeColor, lineWidth: 1.2)
-                )
                 .shadow(
                     color: strokeColor, radius: 5
                 )
                 .frame(width: 55, height: 55)
-                
+            
+            
+            
             Text(user.firstName + " " + user.lastName)
                 .font(Font.custom("Poppins", size: 17).weight(.medium))
             
             Spacer(minLength: 20)
-
+            
             Text(String(format: "%.1f", Double(user.xp)/1000) + "k")
         }
         .padding()

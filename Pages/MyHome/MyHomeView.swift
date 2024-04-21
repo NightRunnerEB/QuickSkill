@@ -127,7 +127,7 @@ struct MyHomeView: View {
                                             .padding(.bottom, 1)
                                         
                                         Text("\(userVM.user.goalText)")
-                                            .font(Font.custom("Poppins", size: 19))
+                                            .font(Font.custom("Poppins", size: 14))
                                             .foregroundColor(.white)
                                             .tracking(0.54)
                                         

@@ -55,7 +55,8 @@ struct CourseView: View {
                                         label: {
                                             HStack(alignment: .bottom) {
                                                 Image("Crystall")
-                                                Text("\(userVM.user.crystals)")
+                                                Text("\(userVM.user.crystall)")
+                                                    .id(userVM.user.crystall)
                                                     .foregroundStyle(Color("Purple"))
                                             }
                                         })
@@ -72,7 +73,8 @@ struct CourseView: View {
                                             HStack(alignment: .bottom) {
                                                 Text("❤️")
                                                     .font(.system(size: 28))
-                                                Text("\(userVM.user.energy)")
+                                                Text("\(userVM.user.hearts)")
+                                                    .id(userVM.user.hearts)
                                                     .foregroundStyle(Color.red)
                                             }
                                         })
@@ -275,7 +277,7 @@ struct CourseView: View {
                                     label: {
                                         HStack(alignment: .bottom) {
                                             Image("Crystal")
-                                            Text("\(userVM.user.crystals)")
+                                            Text("\(userVM.user.crystall)")
                                                 .foregroundStyle(Color("Purple"))
                                         }
                                     })
@@ -291,7 +293,7 @@ struct CourseView: View {
                                     label: {
                                         HStack(alignment: .bottom) {
                                             Image("Battery")
-                                            Text("\(userVM.user.energy)")
+                                            Text("\(userVM.user.hearts)")
                                                 .foregroundStyle(Color("Success-scale"))
                                         }
                                     })
@@ -359,7 +361,7 @@ struct CourseView: View {
                             VStack(spacing: 0) {
                                 Image("Diploma")
                                 Text("Certificate")
-                                    .font(Font.custom("Inter", size: 22).weight(.medium))
+                                    .font(Font.custom("Inter", size: 20).weight(.medium))
                             }
                             Text("Discover your perfect course with QuickSkill's personalized recommendation quiz – unlock your learning journey today! ")
                                 .font(Font.custom("Inter", size: 15))

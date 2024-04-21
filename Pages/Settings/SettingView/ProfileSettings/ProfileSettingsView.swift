@@ -107,10 +107,23 @@ struct ProfileSettingsView: View {
                         .font(Font.Poppins(size: 21).weight(.medium))
                     
                     HStack(spacing: 20) {
-                        Image(userVM.user.photo)
-                            .resizable()
+                        if let photo = userVM.user.photo {
+                            AsyncImage(url: URL(string: photo)) { image in
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                            } placeholder: {
+                                ProgressView()
+                            }
                             .frame(width: 80, height: 80)
-                            .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                            .clipShape(Circle())
+                        } else {
+                            Image(systemName: "person.circle")
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 80, height: 80)
+                                .clipShape(Circle())
+                        }
                         VStack {
                             Button(action: {
                                 // загрузка фото
@@ -148,16 +161,15 @@ struct ProfileSettingsView: View {
                 }
                 
                 Button(action: {
-                    // запрос на сервер об обновлении
+                    dismiss()
                 }, label: {
                     HStack(spacing: 10) {
                         Text("Сохранить")
                             .font(Font.Poppins(size: 12).weight(.medium))
-                            .lineSpacing(21.60)
                             .foregroundColor(.white)
                     }
                     .padding(EdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 8))
-                    .background(Color(red: 0.24, green: 0.24, blue: 0.26).opacity(0.60))
+                    .background(Color("Purple"))
                     .cornerRadius(15)
                 })
             }

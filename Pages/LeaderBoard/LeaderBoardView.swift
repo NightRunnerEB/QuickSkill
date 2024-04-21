@@ -166,7 +166,7 @@ struct LeaderBoardView: View {
                             .font(Font.custom("Poppins", size: 17))
                         
                         Spacer()
-                            .frame(height: .infinity)
+                            .frame(height: 435)
                     }
                 }
             }

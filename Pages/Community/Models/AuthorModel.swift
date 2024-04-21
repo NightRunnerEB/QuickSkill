@@ -9,9 +9,11 @@ import Foundation
 
 struct Author: Identifiable, Decodable {
     let id: Int
-    let photo: String
     let firstName: String
     let lastName: String
+    let status: String
+    let username: String
+    let photo: String?
     
     var fullName: String {
         return "\(firstName) \(lastName)"

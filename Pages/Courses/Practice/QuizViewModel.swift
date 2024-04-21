@@ -26,8 +26,8 @@ class QuizViewModel: ObservableObject {
             questions = [
                 Question(id: 0, text: "Which programming language is boring to anyone?", answers: ["C", "C++", "C#", "C--"], correctAnswer: 2),
                 Question(id: 1, text: "Which programming language is not boring to anyone", answers: ["Swift", "C#", "PHP", "Go"], correctAnswer: 0),
-                Question(id: 3, text: "String is ...", answers: ["Int", "char", "*char", "struct"], correctAnswer: 2),
-                Question(id: 4, text: "Which framework is the best?", answers: ["ASP.NET", "Alamofire", "Django", "Combine"], correctAnswer: 1)
+                Question(id: 3, text: "String is ...", answers: ["Int", "char", "*char", "52"], correctAnswer: 2),
+                Question(id: 4, text: "Which framework is the best?", answers: ["ASP.NET", "SwiftUI", "Django", "Angular"], correctAnswer: 1)
             ]
         }
         isLoading = false
@@ -55,12 +55,15 @@ class QuizViewModel: ObservableObject {
     }
     
     // Метод для проверки ответа и перехода к следующему вопросу
-    func checkAnswer() {
+    func checkAnswer()-> Bool {
         isAnswered = true
         if isCurrentAnswerCorrect() {
             score += 100
             crystals += 30
             success += 1
+            return true
+        } else {
+            return false
         }
     }
     

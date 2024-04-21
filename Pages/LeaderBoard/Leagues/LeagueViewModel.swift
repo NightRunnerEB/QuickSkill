@@ -22,20 +22,17 @@ final class LeagueViewModel: ObservableObject {
                     lastName: i < 10 ? "Doe\(i)" : "",
                     username: i < 10 ? "johndoe123\(i)" : "anonymous",
                     xp: i < 10 ? 1200 : 0,
-                    userLevel: i < 10 ? 5 : 0,
+                    userlevel: i < 10 ? 5 : 0,
                     streak: i < 10 ? 10 : 0,
+                    maxStreak: i < 10 ? 12 : 0,
                     description: i < 10 ? "Passionate learner and coder." : "",
-                    email: i < 10 ? "john.doe\(i)@example.com" : "anonymous@example.com",
                     photo: i < 10 ? "ДорохиеДрузья" : "AnonymousPhoto",
-                    energy: i < 10 ? 100 : 0,
-                    crystals: i < 10 ? 50 : 0,
-                    streakSavers: i < 10 ? 5 : 0,
-                    streakRecord: i < 10 ? 12 : 0,
-                    followers: i < 10 ? 100 : 0,
-                    followings: i < 10 ? 150 : 0,
                     goalText: i < 10 ? "Code daily" : "",
                     goalDay: i < 10 ? 30 : 0,
-                    status: i < 10 ? "Active" : "Inactive"
+                    status: i < 10 ? "Active" : "Inactive",
+                    freezer: i < 10 ? 5 : 0,
+                    hearts: i < 10 ? 100 : 0,
+                    crystall: i < 10 ? 50 : 0
                 )
                 users.append(user)
             }
@@ -72,20 +69,16 @@ final class LeagueViewModel: ObservableObject {
                 lastName: "Kiselev",
                 username: "johndoe123",
                 xp: 1200,
-                userLevel: 5,
+                userlevel: 5,
                 streak: 10,
-                description: "Passionate learner and coder.",
-                email: "john.doe@example.com",
+                maxStreak: 12, description: "Passionate learner and coder.",
                 photo: "ДорохиеДрузья",
-                energy: 100,
-                crystals: 50,
-                streakSavers: 5,
-                streakRecord: 12,
-                followers: 100,
-                followings: 150,
                 goalText: "Code daily",
                 goalDay: 30,
-                status: "Active"
+                status: "Active",
+                freezer: 5,
+                hearts: 100,
+                crystall: 50
             ), count: 5)
             self.isLoading = false
         }

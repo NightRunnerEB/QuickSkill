@@ -144,14 +144,13 @@ struct NewPostView: View {
                 
                 // Post Button
                 Button(action: {
-                    postVM.makePost(topic: topic, description: question) {
-                        isPresented = false
-                    }
+                    postVM.makePost(topic: topic, description: question)
+                    isPresented = false
                 }) {
-                    if postVM.isLoading {
-                        ProgressView()
-                            .frame(width: 150, height: 45)
-                    } else {
+//                    if postVM.isLoading {
+//                        ProgressView()
+//                            .frame(width: 150, height: 45)
+//                    } else {
                         Text("Post")
                             .font(Font.Poppins(size: 15.73))
                             .foregroundColor(.white)
@@ -159,7 +158,7 @@ struct NewPostView: View {
                             .frame(width: 125.58, height: 52.88)
                             .background(Color("Purple"))
                             .cornerRadius(16.52)
-                    }
+//                    }
                 }
                 .padding(6)
             }

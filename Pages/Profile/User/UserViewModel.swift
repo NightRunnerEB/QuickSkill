@@ -6,43 +6,28 @@ final class UserViewModel: ObservableObject {
     @AppStorage("isUserAuthenticated") var isUserAuthenticated: Bool = false
     @Published var errorMessage: String?
     @Published var isRegistered = false
-    //    @Published var user : User!
-    @Published var user : User = User(
-        firstName: "John",
-        lastName: "Doe",
-        username: "johndoe123",
-        xp: 1200,
-        userLevel: 5,
-        streak: 10,
-        description: "Passionate learner and coder.",
-        email: "john.doe@example.com",
-        photo: "ДорохиеДрузья",
-        energy: 5,
-        crystals: 2000,
-        streakSavers: 5,
-        streakRecord: 12,
-        followers: 10,
-        followings: 15,
-        goalText: "Code daily",
-        goalDay: 30,
-        status: "Active"
-    )
+    @Published var user : User!
     @Published var isLoading = false
     
-    func register(firstName: String, lastName: String, email: String, password: String) {
-        let registrationData = RegistrationData(firstName: firstName, lastName: lastName, email: email, password: password)
+    func register(firstName: String, lastName: String, email: String, password: String, completion: @escaping () -> Void) {
+        let registrationData = RegistrationData(firstname: firstName, lastname: lastName, email: email, password: password)
         let urlString = "https://localhost:8081/api/auth/register"
         
         NetworkService.shared.registerUser(registrationData: registrationData, to: urlString) { result in
-            switch result {
-            case .success:
-                self.isRegistered = true
-                print("Регистрация успешно завершена. Токен сохранен.")
-            case .failure(let error):
-                print("Ошибка регистрации: \(error.localizedDescription)")
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    self.isRegistered = true
+                    print("Регистрация успешно завершена.")
+                    completion()
+                case .failure(let error):
+                    print("Ошибка регистрации: \(error.localizedDescription)")
+                    completion()
+                }
             }
         }
     }
+
     
     func login(email: String, password: String) {
         isLoading = true
@@ -51,7 +36,7 @@ final class UserViewModel: ObservableObject {
 //            isLoading = false
 //        }
                 let loginData = LoginData(email: email, password: password)
-                let urlString = "https://localhost:8081/api/auth/login"
+                let urlString = "https://localhost:443/api/auth/login"
         
                 NetworkService.shared.loginUser(loginData: loginData, to: urlString)  { result in
                     switch result {
@@ -66,25 +51,24 @@ final class UserViewModel: ObservableObject {
     }
     
     func getInfo() {
-        isLoading = true
-        let urlString = "https://localhost:8081/api/user"
+        let urlString = "https://localhost:443/api/user/current"
         
-//        NetworkService.shared.performRequest(to: urlString, method: .get) { [weak self] (result: Result<User?, Error>) in
-//            DispatchQueue.main.async {
-//                switch result {
-//                case .success(let dataModel):
-//                    self?.user = dataModel!
-//                    self?.isLoading = false
-//                case .failure(let error):
-//                    self?.handleError(error)
-//                }
-//            }
-//        }
+        NetworkService.shared.performGETRequest(to: urlString) { [weak self] (result: Result<User?, Error>) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let dataModel):
+                    self?.user = dataModel!
+                    self?.isLoading = false
+                case .failure(let error):
+                    self?.handleError(error)
+                }
+            }
+        }
     }
     
     func addResults(xp: Int, crystals: Int) {
         self.user.xp += xp
-        self.user.crystals += crystals
+        self.user.crystall += crystals
     }
     
     func resetPassword(newPassword: String) {
@@ -96,7 +80,7 @@ final class UserViewModel: ObservableObject {
                 switch result {
                 case .success:
                     self.isLoading = false
-                case .failure(let error):
+                case .failure(_):
                     self.errorMessage = "Произошла ошибка, попробуйте позже"
                 }
             }

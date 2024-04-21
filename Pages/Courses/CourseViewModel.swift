@@ -81,7 +81,7 @@ final class CourseViewModel: ObservableObject {
         self.isLoading = true
         self.isLoading = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
-            userCourses = [Course.courses[0], Course.courses[2]]
+            userCourses = [Course.courses[0]]
             self.isLoading = false
         }
         

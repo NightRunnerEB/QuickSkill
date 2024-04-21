@@ -57,7 +57,7 @@ struct RegistrationView: View {
                         .foregroundColor(.black)
                     Text("Your learning journey will be started right after creating account")
                         .multilineTextAlignment(.center)
-                        .font(Font.custom("Poppins", size: 14).weight(.light))
+                        .font(Font.custom("Poppins", size: 12).weight(.light))
                         .foregroundColor(.black)
                 }
             }
@@ -123,9 +123,8 @@ struct RegistrationView: View {
                         .keyboardType(.emailAddress)
                         .submitLabel(.next)
                         .onSubmit { focusedField = .password }
-                        .onChange(of: email) { newValue in
-                            email = newValue.lowercased()
-                        }
+                        .disableAutocorrection(true)
+                        .autocapitalization(.none)
                         .font(Font.custom("Poppins", size: 17))
                     
                     if(!email.isEmpty) {
@@ -196,10 +195,12 @@ struct RegistrationView: View {
             
             Button(action: {
                 focusedField = nil // Скрыть клавиатуру
-                userVM.register(firstName: firstName, lastName: lastName, email: email, password: password)
-                if(userVM.isRegistered) {
-                    isShowingLogIn = true
-                    dismiss()
+                userVM.register(firstName: firstName, lastName: lastName, email: email, password: password) {
+                    // Этот код выполнится после завершения register
+                    if userVM.isRegistered {
+                        isShowingLogIn = true
+                        dismiss()
+                    }
                 }
             }, label: {
                 HStack(spacing: 10) {
