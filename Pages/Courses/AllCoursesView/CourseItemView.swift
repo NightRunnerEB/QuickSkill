@@ -13,13 +13,13 @@ struct CourseItemView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(alignment: .center, spacing: 8) {
-                Image(course.icon)
+                Image(course.media)
                 
                 VStack(alignment: .leading) {
-                    Text(course.title)
+                    Text(course.name)
                         .font(Font.Poppins(size: 17).weight(.semibold))
                     
-                    Text(course.type)
+                    Text(course.focus)
                         .font(Font.Poppins(size: 17)).opacity(0.35)
                 }
                 
@@ -44,11 +44,12 @@ struct CourseItemView: View {
             
             Text(course.description)
                 .font(Font.Poppins(size: 17).weight(.light))
+                .padding(.leading, 13)
         }
-        .padding(7)
+        .padding(9)
     }
 }
 
 #Preview {
-    CourseItemView(course: Course.allCourses[0])
+    CourseItemView(course: Course.courses[0])
 }

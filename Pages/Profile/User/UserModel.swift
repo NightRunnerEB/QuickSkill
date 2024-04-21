@@ -6,72 +6,63 @@
 //
 
 import Foundation
-import SwiftUI
 
-class User: Codable {
+class User: ObservableObject, Decodable {
+    @Published var firstName: String
+    @Published var lastName: String
+    @Published var username: String
+    @Published var xp: Int
+    @Published var userlevel: Int
+    @Published var streak: Int
+    @Published var maxStreak: Int
+    @Published var description: String
+    @Published var photo: String?
+    @Published var goalText: String
+    @Published var goalDay: Double
+    @Published var status: String
+    @Published var freezer: Int
+    @Published var hearts: Int
+    @Published var crystall: Int
     
-    var email: String
-    var firstName: String
-    var lastName: String
-    
-    //возможно тоже лишнее
-    var password: String
-    
-    //воозможно хранить эти списки не нужно, а просто обращаться к бд по токену
-    var followers: [User]
-    var following: [User]
-
-    var avatarImageUrl: String
-    var goal: Goal
-    var experience: Int
-    var hearts: Int
-    var energy: Int
-    var crystalls: Int
-    var streakSavers: Int
-    var streak: Int
-    var streakRecord: Int
-    var coursesSuccess: [Int: Int] // key - id курса, value - текущий уровень
-    var badges : [Int]
-    var certificates : [Int]
-    var ratingLeague : [User]
-    private var _uniqueLogin: String?
-    
-    var uniqueLogin: String {
-        get {
-            if _uniqueLogin == nil {
-                let characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-                _uniqueLogin = "@" + String((0..<7).compactMap{ _ in characters.randomElement() })
-            }
-            return _uniqueLogin!
-        }
-        set {
-            _uniqueLogin = newValue
-        }
+    private enum CodingKeys: String, CodingKey {
+        case firstname, lastname, username, xp, userlevel, streak, maxStreak, description, photo, goalText, goalDay, status, freezer, hearts, crystall
     }
-    var bio: String
     
-    init(email: String, firstName: String, lastName: String, password: String, avatarImageUrl: String, bio: String = "") {
-        self.email = email
+    // Свойства будут инициализированы ниже в init(from:) при декодировании
+    init(firstName: String, lastName: String, username: String, xp: Int, userlevel: Int, streak: Int, maxStreak: Int, description: String, photo: String?, goalText: String, goalDay: Double, status: String, freezer: Int, hearts: Int, crystall: Int) {
         self.firstName = firstName
         self.lastName = lastName
-        self.password = password
-        self.followers = []
-        self.following = []
-        self.avatarImageUrl = avatarImageUrl
-        self.experience = 3400
-        self.bio = bio
-        self.coursesSuccess = [1:2]
-//        self.uniqueLogin = ""
-        self.hearts = 5
-        self.crystalls = 3300
-        self.streakSavers = 1
-        self.streak = 8
-        self.energy = 5
-        self.badges = [1, 2, 3]
-        self.certificates = [1, 2, 3, 4]
-        self.streakRecord = 73
-        self.goal = Goal(duraction: 6, description: "To be the best!")
-
-        self.ratingLeague = []
+        self.username = username
+        self.xp = xp
+        self.userlevel = userlevel
+        self.streak = streak
+        self.maxStreak = maxStreak
+        self.description = description
+        self.photo = photo
+        self.goalText = goalText
+        self.goalDay = goalDay
+        self.status = status
+        self.freezer = freezer
+        self.hearts = hearts
+        self.crystall = crystall
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        _firstName = Published(initialValue: try container.decode(String.self, forKey: .firstname))
+        _lastName = Published(initialValue: try container.decode(String.self, forKey: .lastname))
+        _username = Published(initialValue: try container.decode(String.self, forKey: .username))
+        _xp = Published(initialValue: try container.decode(Int.self, forKey: .xp))
+        _userlevel = Published(initialValue: try container.decode(Int.self, forKey: .userlevel))
+        _streak = Published(initialValue: try container.decode(Int.self, forKey: .streak))
+        _maxStreak = Published(initialValue: try container.decode(Int.self, forKey: .maxStreak))
+        _description = Published(initialValue: try container.decodeIfPresent(String.self, forKey: .description) ?? "")
+        _photo = Published(initialValue: try container.decodeIfPresent(String.self, forKey: .photo))
+        _goalText = Published(initialValue: try container.decodeIfPresent(String.self, forKey: .goalText) ?? "")
+        _goalDay = Published(initialValue: try container.decodeIfPresent(Double.self, forKey: .goalDay) ?? 0)
+        _status = Published(initialValue: try container.decode(String.self, forKey: .status))
+        _freezer = Published(initialValue: try container.decode(Int.self, forKey: .freezer))
+        _hearts = Published(initialValue: try container.decode(Int.self, forKey: .hearts))
+        _crystall = Published(initialValue: try container.decode(Int.self, forKey: .crystall))
     }
 }

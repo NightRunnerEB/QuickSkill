@@ -57,7 +57,7 @@ struct RegistrationView: View {
                         .foregroundColor(.black)
                     Text("Your learning journey will be started right after creating account")
                         .multilineTextAlignment(.center)
-                        .font(Font.custom("Poppins", size: 14).weight(.light))
+                        .font(Font.custom("Poppins", size: 12).weight(.light))
                         .foregroundColor(.black)
                 }
             }
@@ -87,10 +87,8 @@ struct RegistrationView: View {
                     }
                 }
                 .padding(.horizontal, 17)
-                Rectangle()
-                    .foregroundColor(.clear)
-                    .frame(width: 365, height: 0.7)
-                    .background(Color(red: 0.78, green: 0.78, blue: 0.78))
+                
+                LineRegistration()
                     .padding(.bottom, 35)
             }
             
@@ -113,10 +111,8 @@ struct RegistrationView: View {
                     }
                 }
                 .padding(.horizontal, 17)
-                Rectangle()
-                    .foregroundColor(.clear)
-                    .frame(width: 365, height: 0.7)
-                    .background(Color(red: 0.78, green: 0.78, blue: 0.78))
+                
+                LineRegistration()
                     .padding(.bottom, 35)
             }
             
@@ -127,6 +123,8 @@ struct RegistrationView: View {
                         .keyboardType(.emailAddress)
                         .submitLabel(.next)
                         .onSubmit { focusedField = .password }
+                        .disableAutocorrection(true)
+                        .autocapitalization(.none)
                         .font(Font.custom("Poppins", size: 17))
                     
                     if(!email.isEmpty) {
@@ -141,10 +139,8 @@ struct RegistrationView: View {
                     
                 }
                 .padding(.horizontal, 17)
-                Rectangle()
-                    .foregroundColor(.clear)
-                    .frame(width: 365, height: 0.7)
-                    .background(Color(red: 0.78, green: 0.78, blue: 0.78))
+                
+                LineRegistration()
                     .padding(.bottom, 35)
             }
             
@@ -167,10 +163,8 @@ struct RegistrationView: View {
                     }
                 }
                 .padding(.horizontal, 17)
-                Rectangle()
-                    .foregroundColor(.clear)
-                    .frame(width: 365, height: 0.7)
-                    .background(Color(red: 0.78, green: 0.78, blue: 0.78))
+                
+                LineRegistration()
                     .padding(.bottom, 35)
             }
             
@@ -192,10 +186,8 @@ struct RegistrationView: View {
                     }
                 }
                 .padding(.horizontal, 17)
-                Rectangle()
-                    .foregroundColor(.clear)
-                    .frame(width: 365, height: 0.7)
-                    .background(Color(red: 0.78, green: 0.78, blue: 0.78))
+                
+                LineRegistration()
             }
             
             Spacer()
@@ -203,10 +195,12 @@ struct RegistrationView: View {
             
             Button(action: {
                 focusedField = nil // Скрыть клавиатуру
-                userVM.register(firstName: firstName, lastName: lastName, email: email, password: password)
-                if(userVM.isRegistered) {
-                    isShowingLogIn = true
-                    dismiss()
+                userVM.register(firstName: firstName, lastName: lastName, email: email, password: password) {
+                    // Этот код выполнится после завершения register
+                    if userVM.isRegistered {
+                        isShowingLogIn = true
+                        dismiss()
+                    }
                 }
             }, label: {
                 HStack(spacing: 10) {
@@ -220,11 +214,28 @@ struct RegistrationView: View {
                 .background(Color(red: 0.41, green: 0.05, blue: 0.92))
                 .cornerRadius(24)
             })
+            .disabled(firstName.isEmpty || lastName.isEmpty || email.isEmpty || password.isEmpty)
             
             if(confirmPassword != password) {
                 Text("Different passwords have been entered!")
                     .foregroundColor(.red)
             }
+            
+            if let errorMessage = userVM.errorMessage {
+                Text(errorMessage)
+                    .foregroundColor(.red)
+            }
         }
     }
 }
+
+struct LineRegistration: View {
+    var body: some View {
+        Rectangle()
+            .foregroundColor(.clear)
+            .frame(width: 365, height: 0.7)
+            .background(Color(red: 0.78, green: 0.78, blue: 0.78))
+    }
+}
+
+

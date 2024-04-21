@@ -43,7 +43,7 @@ struct GetProView: View {
             
             HStack {
                 Text("Annual paying")
-                    .font(Font.Poppins(size: 14))
+                    .font(Font.Poppins(size: 12))
                     .foregroundColor(.white)
                 
                 Toggle("", isOn: $isOn)

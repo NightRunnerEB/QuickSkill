@@ -2,7 +2,7 @@
 //  GoalModel.swift
 //  QuickSkill
 //
-//  Created by Али Сейфельдин on 23.02.2024.
+//  Created by Евгений Бухарев on 23.02.2024.
 //
 
 import Foundation

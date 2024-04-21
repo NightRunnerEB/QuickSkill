@@ -1,5 +1,5 @@
 //
-//  SheetCrystall.swift
+//  SheetCrystal.swift
 //  QuickSkill
 //
 //  Created by Евгений Бухарев on 25.03.2024.
@@ -8,41 +8,7 @@
 import SwiftUI
 import PartialSheet
 
-struct SheetCrystall_Test: View {
-    @State private var isSheetPresented = false
-    
-    var body: some View {
-        HStack {
-            Spacer()
-            PSButton(
-                isPresenting: $isSheetPresented,
-                label: {
-                    Text("Display the Partial Sheet")
-                })
-            .padding()
-            Spacer()
-        }
-        .partialSheet(
-            isPresented: $isSheetPresented,
-            
-            content: SheetCrystall.init
-        )
-        .navigationBarTitle("Basic Example")
-        .navigationViewStyle(StackNavigationViewStyle())
-    }
-}
-
-struct SheetCrystall_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            SheetCrystall_Test()
-        }
-        .attachPartialSheetToRoot()
-        .navigationViewStyle(StackNavigationViewStyle())
-    }
-}
-
-struct SheetCrystall: View {
+struct SheetCrystal: View {
     @State private var isPresentedGetPro = false
     
     var body: some View {

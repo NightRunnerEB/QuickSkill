@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct QuickSkillApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject var userVM = UserViewModel()
     
     var body: some Scene {

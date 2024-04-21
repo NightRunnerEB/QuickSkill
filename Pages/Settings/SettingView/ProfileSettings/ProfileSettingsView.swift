@@ -91,7 +91,7 @@ struct ProfileSettingsView: View {
                     
                     HStack {
                         
-                        TextField("Username", text: $userVM.user.uniqueLogin)
+                        TextField("Username", text: $userVM.user.username)
                         
                         Image(systemName: "checkmark.shield")
                             .foregroundStyle(Color.green)
@@ -107,10 +107,23 @@ struct ProfileSettingsView: View {
                         .font(Font.Poppins(size: 21).weight(.medium))
                     
                     HStack(spacing: 20) {
-                        Image("ДорохиеДрузья")
-                            .resizable()
+                        if let photo = userVM.user.photo {
+                            AsyncImage(url: URL(string: photo)) { image in
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                            } placeholder: {
+                                ProgressView()
+                            }
                             .frame(width: 80, height: 80)
-                            .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                            .clipShape(Circle())
+                        } else {
+                            Image(systemName: "person.circle")
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 80, height: 80)
+                                .clipShape(Circle())
+                        }
                         VStack {
                             Button(action: {
                                 // загрузка фото
@@ -139,7 +152,7 @@ struct ProfileSettingsView: View {
                         .padding(.top, 12)
                     
                     
-                    TextField("Information about you", text: $userVM.user.bio)
+                    TextField("Information about you", text: $userVM.user.description)
                         .padding()
                         .frame(width: 369, height: 130)
                         .background(Color("Block"))
@@ -148,20 +161,20 @@ struct ProfileSettingsView: View {
                 }
                 
                 Button(action: {
-                    // запрос на сервер об обновлении
+                    dismiss()
                 }, label: {
                     HStack(spacing: 10) {
-                        Text("Save")
-                            .font(Font.Poppins(size: 15).weight(.medium))
+                        Text("Сохранить")
+                            .font(Font.Poppins(size: 12).weight(.medium))
                             .foregroundColor(.white)
                     }
-                    .padding(EdgeInsets(top: 10, leading: 30, bottom: 10, trailing: 30))
+                    .padding(EdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 8))
                     .background(Color("Purple"))
                     .cornerRadius(15)
                 })
-                .padding()
             }
         }
+        .padding(.top, 1)
     }
 }
 

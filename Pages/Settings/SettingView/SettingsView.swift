@@ -2,7 +2,7 @@
 //  SettingsView.swift
 //  QuickSkill
 //
-//  Created by Али СейфельдинАли Сейфельдин on 23.02.2024.
+//  Created by Евгений Бухарев on 23.02.2024.
 //
 
 import SwiftUI
@@ -124,7 +124,7 @@ struct SettingsView: View {
                 
                 NavigationLink(destination: ContactUsView()) {
                     Text("Contact us")
-                        .font(Font.Poppins(size: 15).weight(.medium))
+                        .font(Font.Poppins(size: 14).weight(.medium))
                         .foregroundColor(.white)
                         .padding()
                         .frame(width: 120, height: 42)

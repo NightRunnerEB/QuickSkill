@@ -9,8 +9,7 @@ import SwiftUI
 
 struct ProgressCircleView: View {
     
-    let tasksCount: Int
-    @State var progress: Int
+    var progress: Int
 
     var body: some View {
         ZStack {
@@ -20,13 +19,13 @@ struct ProgressCircleView: View {
                 .opacity(0.13)
             
             Circle()
-                .trim(from: 0.0, to: CGFloat(progress) / CGFloat(tasksCount))
+                .trim(from: 0.0, to: CGFloat(progress) / 100)
                 .stroke(style: StrokeStyle(lineWidth: 10.0, lineCap: .round, lineJoin: .round))
                 .foregroundColor(Color("Purple"))
                 .rotationEffect(Angle(degrees: 270.0))
                 .animation(.linear, value: progress)
             
-            Text(String(format: "%.0f%%", CGFloat(progress) / CGFloat(tasksCount) * 100))
+            Text("\(progress)")
                 .font(Font.Poppins(size: 22).weight(.bold))
                 .foregroundColor(.black)
         }

@@ -10,16 +10,21 @@ import PartialSheet
 
 struct ContentView: View {
     @AppStorage("isUserAuthenticated") var isUserAuthenticated: Bool = false
+    @AppStorage("NotificationPermission") var isNotificationPermitted: Bool = false
+    @EnvironmentObject var userVM: UserViewModel
+    @StateObject var courseVM = CourseViewModel()
     
     var body: some View {
-        if isUserAuthenticated {
-            MainView()
-        } else {
-            NavigationView {
+        Group {
+            if isUserAuthenticated {
+                MainView()
+                    .onAppear {
+                        userVM.getInfo()
+                    }
+                    .environmentObject(courseVM)
+            } else {
                 PresentationView()
             }
-            .navigationViewStyle(StackNavigationViewStyle())
-            .attachPartialSheetToRoot()
         }
     }
 }

@@ -2,7 +2,7 @@
 //  GoalSettingView.swift
 //  QuickSkill
 //
-//  Created by Али Сейфельдин on 23.02.2024.
+//  Created by Евгений Бухарев on 23.02.2024.
 //
 
 import SwiftUI
@@ -13,7 +13,7 @@ struct GoalSettingView: View {
     // Используем словарь для хранения состояний нажатия по уникальному идентификатору текстового элемента
     @State private var isPressedDict: [Int: Bool] = [:]
     @Environment(\.dismiss) var dismiss
-    
+    @AppStorage("NotificationPermission") var isNotificationPermitted: Bool = false
     
     var body: some View {
         VStack(spacing: 40) {
@@ -81,7 +81,7 @@ struct GoalSettingView: View {
                         .onTapGesture {
                             isPressedDict = isPressedDict.mapValues { _ in false }
                             self.isPressedDict[0] = true
-                            userVM.user.goal.description = "Find a new job 👨‍💻"
+                            userVM.user.goalText = "Find a new job 👨‍💻"
                         }
                         
                         ZStack() {
@@ -101,12 +101,11 @@ struct GoalSettingView: View {
                                 .font(Font.Poppins(size: 16))
                                 .lineSpacing(15.60)
                                 .foregroundColor(isPressedDict[1, default: false] ? .white : .black)
-                            
                         }
                         .onTapGesture {
                             isPressedDict = isPressedDict.mapValues { _ in false }
                             self.isPressedDict[1] = true
-                            userVM.user.goal.description = "Just get a new skill😎"
+                            userVM.user.goalText = "Just get a new skill😎"
                         }
                     }
                     
@@ -132,7 +131,7 @@ struct GoalSettingView: View {
                         .onTapGesture {
                             isPressedDict = isPressedDict.mapValues { _ in false }
                             self.isPressedDict[2] = true
-                            userVM.user.goal.description = "Learn for fun🙂"
+                            userVM.user.goalText = "Learn for fun🙂"
                         }
                         
                         ZStack() {
@@ -155,7 +154,7 @@ struct GoalSettingView: View {
                         .onTapGesture {
                             isPressedDict = isPressedDict.mapValues { _ in false }
                             self.isPressedDict[3] = true
-                            userVM.user.goal.description = "Learn for school🏫"
+                            userVM.user.goalText = "Learn for school🏫"
                         }
                     }
                     
@@ -180,7 +179,7 @@ struct GoalSettingView: View {
                         .onTapGesture {
                             isPressedDict = isPressedDict.mapValues { _ in false }
                             self.isPressedDict[4] = true
-                            userVM.user.goal.description = "Get raise🔝"
+                            userVM.user.goalText = "Get raise🔝"
                         }
                         
                         ZStack() {
@@ -195,11 +194,16 @@ struct GoalSettingView: View {
                                         .stroke(.black, lineWidth: 0.50)
                                 )
                             
-                            TextField("Or type your own...", text: $userVM.user.goal.description)
+                            TextField("Or type your own...", text: $userVM.user.goalText)
                                 .multilineTextAlignment(.center)
                                 .padding()
                                 .font(Font.custom("Poppins", size: 16))
                                 .lineSpacing(15.60)
+                                .onTapGesture {
+                                    for key in 0...4 {
+                                        isPressedDict[key] = false
+                                    }
+                                }
                         }
                         .frame(width: 180, height: 52)
                     }
@@ -210,7 +214,7 @@ struct GoalSettingView: View {
                 Text("How many days a week will you study? 🗓️")
                     .font(Font.Poppins(size: 16.70).weight(.medium))
                 
-                GoalSliderView(dayOfWeek: $userVM.user.goal.duraction)
+                GoalSliderView(dayOfWeek: $userVM.user.goalDay)
             }
             
             VStack(spacing: 32) {
@@ -226,7 +230,7 @@ struct GoalSettingView: View {
                         
                         Rectangle()
                             .foregroundColor(isPressedDict[5, default: false] ? Color("Purple") : .white)
-                            .frame(width: 162, height: 52)
+                            .frame(width: 162, height: 48)
                             .background(Color("Purple"))
                             .cornerRadius(15)
                             .overlay(
@@ -237,21 +241,29 @@ struct GoalSettingView: View {
                             .offset(x: 0, y: 0)
                         
                         Text("Yes, notify me ✅")
-                            .font(Font.Poppins(size: 16.50).weight(.medium))
-                            .lineSpacing(8)
+                            .font(Font.Poppins(size: 15).weight(.medium))
                             .foregroundColor(isPressedDict[5, default: false] ? .white : .black)
                             .offset(x: 2, y: 1)
                     }
                     .onTapGesture {
                         self.isPressedDict[6] = false
                         self.isPressedDict[5] = true
+                        
+                        if isNotificationPermitted {
+                            NotificationManager.shared.sendNotification(title: "Notification", body: "You have approved the notifications!")
+                        } else {
+                            NotificationManager.shared.requestAuthorization { granted in
+                                self.isNotificationPermitted = granted
+                                NotificationManager.shared.sendNotification(title: "Notification", body: "You have approved the notifications!")
+                            }
+                        }
                     }
                     
                     ZStack() {
                         
                         Rectangle()
                             .foregroundColor(isPressedDict[6, default: false] ? Color("Purple") : .white)
-                            .frame(width: 162, height: 52)
+                            .frame(width: 162, height: 48)
                             .background(.white)
                             .cornerRadius(15)
                             .overlay(
@@ -262,18 +274,39 @@ struct GoalSettingView: View {
                             .offset(x: 0, y: 0)
                         
                         Text("No, thanks ❌")
-                            .font(Font.Poppins(size: 16.50).weight(.medium))
-                            .lineSpacing(8)
+                            .font(Font.Poppins(size: 15).weight(.medium))
                             .foregroundColor(isPressedDict[6, default: false] ? .white : .black)
                             .offset(x: 4, y: 0)
                     }
                     .onTapGesture {
                         self.isPressedDict[5] = false
                         self.isPressedDict[6] = true
+
+                        if isNotificationPermitted {
+                            NotificationManager.shared.sendNotification(title: "Notifications are disabled", body: "This is your last notification:(")
+                            self.isNotificationPermitted = false
+                        }
                     }
                 }
             }
             .frame(width: 407, height: 92)
+            
+            HStack {
+                Spacer()
+                
+                Button(action: {
+                    dismiss()
+                }, label: {
+                    Text("Save")
+                        .font(Font.Poppins(size: 15.73))
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(width: 105, height: 40)
+                        .background(Color("Purple"))
+                        .cornerRadius(15)
+                })
+                .padding(.trailing, 20)
+            }
         }
     }
 }

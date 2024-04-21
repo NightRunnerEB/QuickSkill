@@ -8,75 +8,40 @@
 import Foundation
 
 // Модель для курса
-struct Course: Identifiable, Codable {
-    var id: Int
-    var lecturesAndPractices: [LectureAndPractice]
-    var icon: String
-    var title: String
-    var durationMonth: Int
+class Course: Identifiable, Decodable {
+    let id: Int
+    var status: String
+    var media: String
+    var name: String
+    var focus: String
     var description: String
+    var durationMonth: String
     var difficultyLevel: Int
-    var type: CourseType.RawValue
-}
+    var progress: Int
+    var cost: Double
+    let joined: Bool
 
-// Вспомогательная структура для пар лекций и практик
-struct LectureAndPractice: Identifiable, Codable {
-    var id = UUID()
-    var lecture: Lecture
-    var practice: Practice
-}
+    // Инициализатор для создания объектов Course
+    init(id: Int, status: String, media: String, name: String, focus: String, description: String, durationMonth: String, difficultyLevel: Int, progress: Int, cost: Double, joined: Bool) {
+        self.id = id
+        self.status = status
+        self.media = media
+        self.name = name
+        self.focus = focus
+        self.description = description
+        self.durationMonth = durationMonth
+        self.difficultyLevel = difficultyLevel
+        self.progress = progress
+        self.cost = cost
+        self.joined = joined
+    }
 
-enum CourseType: String {
-    case programmingLang = "Programming language"
-    case engineering = "Engineering"
-}
-
-extension Course {
-    //Примеры
-    static let comment = Comment(description: "Very informative lecture.", authorLogin: "user123", likes: 5)
-    static let task1 = Task(questionDescription: "What is polymorphism?", answerOptions: ["Inheritance", "Encapsulation", "Multiple forms"], correctAnswerIndex: 2)
-    static let task2 = Task(questionDescription: "What is polymorphism?", answerOptions: ["Inheritance", "Encapsulation", "Multiple forms"], correctAnswerIndex: 2)
-    static let task3 = Task(questionDescription: "What is polymorphism?", answerOptions: ["Inheritance", "Encapsulation", "Multiple forms"], correctAnswerIndex: 2)
-    static let lecture1 = Lecture(videoUrl: URL(string: "https://example.com/lecture.mp4")!, title: "Basic data types", description: "This lecture covers the basics of C#.", comments: [comment])
-    static let lecture2 = Lecture(videoUrl: URL(string: "https://example.com/lecture.mp4")!, title: "Working with strings", description: "This lecture covers the basics of C#.", comments: [comment])
-    static let lecture3 = Lecture(videoUrl: URL(string: "https://example.com/lecture.mp4")!, title: "Basic data structures and sorting", description: "This lecture covers the basics of C#.", comments: [comment])
-    static let practice = Practice(title: "Basic C# Practice", description: "Fucking great course & we need money", tasks: [task1, task2, task3], numberOfCorrectAnswers: 0)
-    
-    static let introductionCsharp = Course(id: 0,
-                                           lecturesAndPractices: [LectureAndPractice(lecture: lecture1, practice: practice), LectureAndPractice(lecture: lecture2, practice: practice), LectureAndPractice(lecture: lecture3, practice: practice)],
-                                           icon: "C#_icon",
-                                           title: "C# Introduction",
-                                           durationMonth: 2,
-                                           description: "This course introduces the basics of C# programming.",
-                                           difficultyLevel: 1,
-                                           type: CourseType.programmingLang.rawValue
-    )
-    
-    static let introductionCplus = Course(id: 1,
-                                          lecturesAndPractices: [LectureAndPractice(lecture: lecture1, practice: practice), LectureAndPractice(lecture: lecture1, practice: practice), LectureAndPractice(lecture: lecture1, practice: practice)],
-                                          icon: "C++_icon",
-                                          title: "C++ Introduction",
-                                          durationMonth: 1,
-                                          description: "This course introduces the basics of C++ programming.",
-                                          difficultyLevel: 1,
-                                          type: CourseType.programmingLang.rawValue
-    )
-    
-    static let intermediatePython = Course(id: 2,
-                                           lecturesAndPractices: [LectureAndPractice(lecture: lecture1, practice: practice), LectureAndPractice(lecture: lecture1, practice: practice), LectureAndPractice(lecture: lecture1, practice: practice)],
-                                           icon: "C++_icon",
-                                           title: "Python Intermediate",
-                                           durationMonth: 1,
-                                           description: "The Python Intermediate course is designed for students already familiar with the basics of Python who want to deepen their knowledge and skills in programming in this language.",
-                                           difficultyLevel: 1,
-                                           type: CourseType.programmingLang.rawValue
-    )
-}
-
-extension Course {
-    static let allCourses: [Course] = [
-        .introductionCsharp,
-        .introductionCplus,
-        .intermediatePython
+    // Статическая переменная для хранения списка курсов
+    static var courses: [Course] = [
+        Course(id: 101, status: "Active", media: "C++_icon", name: "Intro to C++", focus: "C++ Development", description: "Learn the basics of C++", durationMonth: "3 months", difficultyLevel: 2, progress: 0, cost: 99.99, joined: true),
+        Course(id: 102, status: "Active", media: "C#_icon", name: "Advanced C#", focus: "Software Development", description: "Dive deep into C# language features", durationMonth: "4 months", difficultyLevel: 3, progress: 0, cost: 149.99, joined: false),
+        Course(id: 103, status: "Active", media: "C++_icon", name: "C++ Design Patterns", focus: "Design Principles", description: "Explore design patterns used in C++", durationMonth: "2 months", difficultyLevel: 4, progress: 75, cost: 199.99, joined: true),
+        Course(id: 104, status: "Active", media: "C#_icon", name: "Data Structures and Algorithms in C#", focus: "Computer Science", description: "Understand data structures for better coding", durationMonth: "6 months", difficultyLevel: 5, progress: 0, cost: 299.99, joined: false)
     ]
 }
+

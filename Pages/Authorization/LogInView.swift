@@ -21,8 +21,33 @@ struct LogInView: View {
     
     var body: some View {
         VStack(spacing: 10) {
-            
-            HStack {
+          VStack(spacing: 8) {
+            Text("👋")
+              Text("Welcome Back!")
+              .font(Font.custom("Poppins", size: 17).weight(.medium))
+              .foregroundColor(.black)
+          }
+        }
+        .padding(16)
+        .frame(width: 308, height: 88)
+        .background(Color("Block"))
+        .cornerRadius(24)
+        .padding(.top, 60)
+        
+        Spacer()
+        
+        VStack {
+            HStack() {
+                TextField("Email", text: $email)
+                    .focused($focusedField, equals: .email)
+                    .keyboardType(.emailAddress)
+                    .submitLabel(.next)
+                    .onSubmit { focusedField = .password }
+                    .onChange(of: email) { newValue in
+                        email = newValue.lowercased()
+                    }
+                    .font(Font.custom("Poppins", size: 17))
+                
                 Button(action: {
                     dismiss()
                 }, label: {
@@ -81,69 +106,40 @@ struct LogInView: View {
                     .background(Color(red: 0.78, green: 0.78, blue: 0.78))
                     .padding(.bottom, 35)
             }
-            
-            VStack {
-                HStack() {
-                    SecureField("Password", text: $password)
-                        .focused($focusedField, equals: .password)
-                        .submitLabel(.join)
-                        .font(Font.custom("Poppins", size: 17))
-                    
-                    if !password.isEmpty {
-                        Button(action: {
-                            userVM.login(email: email, password: password)
-                        }, label: {
-                            Image(systemName: "xmark.circle.fill")
-                                .imageScale(.small)
-                                .foregroundStyle(Color.gray)
-                        })
-                    }
-                }
-                .padding(.horizontal, 17)
-                Rectangle()
-                    .foregroundColor(.clear)
-                    .frame(width: 365, height: 0.7)
-                    .background(Color(red: 0.78, green: 0.78, blue: 0.78))
-                    .padding(.bottom, 15)
-            }
-            
-            HStack {
-                Spacer()
-                NavigationLink(destination: ResetPasswordView()) {
-                    Text("Forgot Password?")
-                        .font(Font.custom("Poppins", size: 15).weight(.semibold))
-                        .foregroundStyle(.red)
-                        .padding(.trailing, 20)
-                }
-            }
-            
-            Spacer()
-            
-            if userVM.isLoading {
-                ProgressView()
+        }
+        
+        Spacer()
+        
+        if userVM.isLoading {
+            ProgressView()
+                .lineSpacing(18)
+                .foregroundColor(.white)
+                .padding(EdgeInsets(top: 15, leading: 33, bottom: 15, trailing: 33))
+                .frame(width: 132, height: 48)
+                .background(Color.white)
+                .cornerRadius(24)
+        } else {
+            Button(action: {
+                focusedField = nil // Скрыть клавиатуру
+                userVM.login(email: email, password: password)
+            }, label: {
+                HStack(spacing: 10) {
+                  Text("Log in")
+                    .font(Font.custom("Poppins", size: 17).weight(.semibold))
                     .lineSpacing(18)
                     .foregroundColor(.white)
-                    .padding(EdgeInsets(top: 15, leading: 33, bottom: 15, trailing: 33))
-                    .frame(width: 132, height: 48)
-                    .background(Color.white)
-                    .cornerRadius(24)
-            } else {
-                Button(action: {
-                    focusedField = nil // Скрыть клавиатуру
-                    userVM.login(email: email, password: password)
-                }, label: {
-                    HStack(spacing: 10) {
-                        Text("Log in")
-                            .font(Font.custom("Poppins", size: 17).weight(.semibold))
-                            .lineSpacing(18)
-                            .foregroundColor(.white)
-                    }
-                    .padding(EdgeInsets(top: 15, leading: 33, bottom: 15, trailing: 33))
-                    .frame(width: 132, height: 48)
-                    .background(Color(red: 0.41, green: 0.05, blue: 0.92))
-                    .cornerRadius(24)
-                })
-            }
+                }
+                .padding(EdgeInsets(top: 15, leading: 33, bottom: 15, trailing: 33))
+                .frame(width: 132, height: 48)
+                .background(Color(red: 0.41, green: 0.05, blue: 0.92))
+                .cornerRadius(24)
+            })
+            .disabled(email.isEmpty || password.isEmpty)
+        }
+
+        if let errorMessage = userVM.errorMessage {
+            Text(errorMessage)
+                .foregroundColor(.red)
         }
     }
 }

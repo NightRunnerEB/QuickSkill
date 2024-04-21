@@ -67,9 +67,9 @@ struct SnapCarousel<Content: View, T: Identifiable>: View {
                         
                         let roundIndex = progress.rounded()
                         
-                        currentIndex = max(min(currentIndex + Int(roundIndex), list.count - 1), 0)
+//                        currentIndex = max(min(currentIndex + Int(roundIndex), list.count - 1), 0)
                         
-//                        currentIndex = index
+                        currentIndex = index
                     })
                     .onChanged({ value in
                         // updating only index...
@@ -81,7 +81,9 @@ struct SnapCarousel<Content: View, T: Identifiable>: View {
                         
                         let roundIndex = progress.rounded()
                         
-                        index = max(min(currentIndex + Int(roundIndex), list.count - 1), 0)
+//                        index = max(min(currentIndex + Int(roundIndex), list.count - 1), 0)
+                        
+                        index = currentIndex
                     })
             )
         }
@@ -94,6 +96,8 @@ struct SnapCarousel<Content: View, T: Identifiable>: View {
 
 #Preview {
     @StateObject var userVM = UserViewModel()
-    return LeaderBoardView(currentLeagueId: userVM.user.experience / 1000)
+    @StateObject var courseVM = CourseViewModel()
+    return LeaderBoardView()
         .environmentObject(userVM)
+        .environmentObject(courseVM)
 }
